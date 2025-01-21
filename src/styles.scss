@@ -1,1 +1,97 @@
-/* You can add global styles to this file, and also import other style files */
+@import './spacings.scss';
+
+$body-color: #1A1C20;
+$btn-bg-color: #313437;
+$game-bg-color: #25272B;
+$border-color: #313437;
+$primary: #EAEAEA;
+$secondary: #FF4F5A;
+
+
+
+// Main Colors
+// Background (Dark): #1A1C20
+// Primary Accent (Digital Green): #00A676
+// Secondary Accent (Warning Red): #FF4F5A
+
+// Text Colors
+// Primary Text: #EAEAEA
+// Secondary Text: #A0A0A0
+
+// Interactive Elements
+// Button Background: #313437
+// Button Hover: #00C896
+// Link Color: #4ABDAC
+
+// Warnings & Errors
+// Warning Color: #FFC857
+// Error Color: #D72638
+
+@mixin display($flex: flex, $jc: center, $ai: center) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+h1 {
+    color: $primary;
+}
+
+.flex-center {
+    @include display();
+}
+
+.desk-max-width {
+    width: 100%;
+    max-width: 768px;
+    // background-color: aliceblue;
+    display: flex;
+  }
+
+
+  body {
+    background-color: $body-color;
+    color: $primary;
+    font-family: 'Arial', sans-serif;
+  }
+  
+  button {
+    background-color: $btn-bg-color;
+    color: $primary;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #00C896;
+    color: #1A1C20;
+  }
+  
+  a {
+    color: #4ABDAC;
+    text-decoration: none;
+  }
+  
+  a:hover {
+    text-decoration: underline;
+  }
+  
+  .alert {
+    background-color: #FFC857;
+    color: #1A1C20;
+    padding: 10px;
+    border-radius: 5px;
+  }
+  
+  .error {
+    background-color: #D72638;
+    color: #FFF;
+    padding: 10px;
+    border-radius: 5px;
+  }
+
+
+
+
+

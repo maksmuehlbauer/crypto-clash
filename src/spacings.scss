@@ -1,0 +1,48 @@
+  // Variablen für die Abstände
+  $spacing-values: (
+    8: 8px,
+    16: 16px,
+    24: 24px,
+    32: 32px,
+    48: 48px,
+    64: 64px,
+    96: 96px
+  );
+  
+  // Mixin für Padding
+  @mixin padding-classes($direction) {
+    @each $key, $value in $spacing-values {
+      .p#{$direction}-#{$key} {
+        padding-#{$direction}: #{$value};
+      }
+    }
+  }
+  
+  // Mixin für Margin
+  @mixin margin-classes($direction) {
+    @each $key, $value in $spacing-values {
+        @if $direction == t {
+
+            .m#{$direction}-#{$key} {
+                margin-#{$direction}op: #{$value};
+              }
+        }
+
+    }
+  }
+  
+  // Paddings generieren
+  @include padding-classes(t); // top
+  @include padding-classes(b); // bottom
+  @include padding-classes(l); // left
+  @include padding-classes(r); // right
+  @include padding-classes(x); // left + right
+  @include padding-classes(y); // top + bottom
+  
+  // Margins generieren
+  @include margin-classes(t); // top
+  @include margin-classes(b); // bottom
+  @include margin-classes(l); // left
+  @include margin-classes(r); // right
+  @include margin-classes(x); // left + right
+  @include margin-classes(y); // top + bottom

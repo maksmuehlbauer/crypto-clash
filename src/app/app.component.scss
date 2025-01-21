@@ -1,0 +1,19 @@
+@import './../styles.scss';
+
+.main-content {
+    height: 100vh;
+    @include display();
+    width: 100%
+}
+
+.gamebox {
+    @include display();
+    width: 100%;
+    height: 800px;
+    background-color: #5c5f63;
+    background-color: $game-bg-color;
+    border: 3px solid $border-color;
+    border-radius: 24px;
+}
+
+
