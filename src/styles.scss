@@ -1,4 +1,7 @@
 @import './spacings.scss';
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+
 
 $body-color: #1A1C20;
 $btn-bg-color: #313437;
@@ -6,6 +9,8 @@ $game-bg-color: #25272B;
 $border-color: #313437;
 $primary: #EAEAEA;
 $secondary: #FF4F5A;
+$warning-color: #FFC857;
+$error-color: #D72638;
 
 
 
@@ -27,14 +32,30 @@ $secondary: #FF4F5A;
 // Warning Color: #FFC857
 // Error Color: #D72638
 
+* {
+  margin: 0;
+  box-sizing: border-box;
+}
+
 @mixin display($flex: flex, $jc: center, $ai: center) {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    display: $flex;
+    justify-content: $jc;
+    align-items: $ai;
 }
 
 h1 {
-    color: $primary;
+  color: $primary;
+  font-family: "Orbitron", sans-serif;
+  text-transform: uppercase;
+  font-size: 48px;
+  letter-spacing: 4px;
+}
+
+h2 {
+  color: $primary;
+  font-family: "Orbitron", sans-serif;
+  font-size: 32px;
+  letter-spacing: 6.2px;
 }
 
 .flex-center {

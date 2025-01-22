@@ -1,4 +1,3 @@
-  // Variablen für die Abstände
   $spacing-values: (
     8: 8px,
     16: 16px,
@@ -9,28 +8,91 @@
     96: 96px
   );
   
-  // Mixin für Padding
-  @mixin padding-classes($direction) {
-    @each $key, $value in $spacing-values {
-      .p#{$direction}-#{$key} {
-        padding-#{$direction}: #{$value};
-      }
-    }
-  }
-  
-  // Mixin für Margin
   @mixin margin-classes($direction) {
     @each $key, $value in $spacing-values {
         @if $direction == t {
-
             .m#{$direction}-#{$key} {
                 margin-#{$direction}op: #{$value};
               }
         }
+        @if $direction == b {
+          .m#{$direction}-#{$key} {
+              margin-#{$direction}ottom: #{$value};
+            }
+        }
+        @if $direction == l {
+          .m#{$direction}-#{$key} {
+              margin-#{$direction}eft: #{$value};
+            }
+        }
+        @if $direction == r {
+          .m#{$direction}-#{$key} {
+              margin-#{$direction}ight: #{$value};
+            }
+        }
+        @if $direction == x {
+          .m#{$direction}-#{$key} {
+              margin-right: #{$value};
+              margin-left: #{$value};
+            }
+        }
+        @if $direction == y {
+          .m#{$direction}-#{$key} {
+              margin-top: #{$value};
+              margin-bottom: #{$value};
+            }
+        }
 
     }
   }
-  
+
+  // Margins generieren
+  @include margin-classes(t); // top
+  @include margin-classes(b); // bottom
+  @include margin-classes(l); // left
+  @include margin-classes(r); // right
+  @include margin-classes(x); // left + right
+  @include margin-classes(y); // top + bottom
+
+
+  @mixin padding-classes($direction) {
+    @each $key, $value in $spacing-values {
+        @if $direction == t {
+            .p#{$direction}-#{$key} {
+                padding-#{$direction}op: #{$value};
+              }
+        }
+        @if $direction == b {
+          .p#{$direction}-#{$key} {
+            padding-#{$direction}ottom: #{$value};
+            }
+        }
+        @if $direction == l {
+          .p#{$direction}-#{$key} {
+              padding-#{$direction}eft: #{$value};
+            }
+        }
+        @if $direction == r {
+          .p#{$direction}-#{$key} {
+              padding-#{$direction}ight: #{$value};
+            }
+        }
+        @if $direction == x {
+          .p#{$direction}-#{$key} {
+              padding-right: #{$value};
+              padding-left: #{$value};
+            }
+        }
+        @if $direction == y {
+          .p#{$direction}-#{$key} {
+              padding-top: #{$value};
+              padding-bottom: #{$value};
+            }
+        }
+
+    }
+  }
+
   // Paddings generieren
   @include padding-classes(t); // top
   @include padding-classes(b); // bottom
@@ -39,10 +101,3 @@
   @include padding-classes(x); // left + right
   @include padding-classes(y); // top + bottom
   
-  // Margins generieren
-  @include margin-classes(t); // top
-  @include margin-classes(b); // bottom
-  @include margin-classes(l); // left
-  @include margin-classes(r); // right
-  @include margin-classes(x); // left + right
-  @include margin-classes(y); // top + bottom
