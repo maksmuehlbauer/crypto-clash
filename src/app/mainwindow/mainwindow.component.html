@@ -8,17 +8,44 @@
         </div>
     </div>
     <div class="select-container my-32 px-8">
-        <label for="options">Wähle eine Klasse:</label>
-        <select name="" id="">
-            <option value="select"><</option>
-            <option value="class-1">Asia Bot Network (ABN)</option>
-            <option value="class 2">Donald Musk Holding (DMH)</option>
-            <option value="class 3">Bureaucracy Empire (BCE)</option>
-        </select>
+        <!-- <label for="options">Choose a faction:</label> -->
+        <div class="custom-select">
+          <div class="select-header" (click)="toggleDropdown()">
+            <span>{{ classesData.classes[selectedClassIndex].name || 'Choose a faction' }}</span>
+            <span class="arrow" [class.open]="dropdownOpen">▼</span>
+          </div>
+          <ul class="select-dropdown" *ngIf="dropdownOpen">
+            <li
+              *ngFor="let class of classesData.classes; let i = index"
+              (click)="selectClass(i)"
+              [class.selected]="i === selectedClassIndex"
+            >
+              {{ class.name }}
+            </li>
+          </ul>
+        </div>
+      </div>
+    <div class="game-info-container mt-64">
+        <div class="card">
+            <span><strong>{{ classesData.classes[selectedClassIndex].tag }} Attributes:</strong> </span>
+            <span>{{ attributeAdvantage }}</span>
+            <span>{{ attributeDisAdvantage }}</span>
+
+        </div>
+        <div class="card">
+            <span><strong>Starting Conditions:</strong></span>
+            <span>Start Money: {{ factionStartingMoney | currency }}</span>
+            <span>IT-Security Level: {{ factionItSecurityLevel }} %</span>
+            <span>Hardware Wallet Space: {{ factionWalletSpace }} Coins</span>
+        </div>
     </div>
-    <div class="attribute-container">
-       <span>Attribute 1: + Stats</span>
-       <span>Attribute 2: - Stats</span>
+    <div class="button-container mt-64">
+        <a routerLink="scores">Scores</a>
+        <a>Play</a>
+        <a>Story</a>
+        <a>Rules</a>
     </div>
 </div>
+
+
 
