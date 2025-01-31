@@ -21,6 +21,7 @@ export class MainwindowComponent {
   classesData = inject(GameServiceService);
   selectedClassIndex: number = 0;
   dropdownOpen = false;
+  playerName: string = ''
 
   toggleDropdown() {
     this.dropdownOpen = !this.dropdownOpen;

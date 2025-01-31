@@ -62,10 +62,30 @@ h2 {
     @include display();
 }
 
+.back-btn {
+  position: absolute;
+  top: 32px;
+  left: 32px;
+  display: block;
+  width: 64px;
+  height: 64px;
+  border-radius: 100%;
+  background-color: $btn-bg-color;
+  color: $primary;
+  @include display();
+  &:hover {
+    background-color: #00C896;
+    color: #1A1C20;
+  }
+  >img {
+    width: 32px;
+    object-fit: cover;
+  }
+}
+
 .desk-max-width {
     width: 100%;
     max-width: 768px;
-    // background-color: aliceblue;
     display: flex;
   }
 

@@ -1,50 +1,60 @@
 <div class="main-content">
     <h1>Crypto Clash</h1>
     <h2>The last Transaction</h2>
-    <div class="input-container mt-32">
-        <input type="name" id="name" placeholder="Enter a name" required>
-        <div class="error-msg pt-8">
-            <p>a Name must contain at least 3 Characters</p>
-        </div>
-    </div>
-    <div class="select-container my-32 px-8">
-        <!-- <label for="options">Choose a faction:</label> -->
-        <div class="custom-select">
-          <div class="select-header" (click)="toggleDropdown()">
-            <span>{{ classesData.classes[selectedClassIndex].name || 'Choose a faction' }}</span>
-            <span class="arrow" [class.open]="dropdownOpen">▼</span>
+    <form>
+      <div class="input-container mt-32">
+          <input #userName="ngModel" [(ngModel)]="playerName" 
+          type="playername" 
+          id="playername" 
+          name="playername" 
+          minlength="3"
+          placeholder="Enter a name" 
+          required>
+          @if (userName.dirty) {
+            <div class="error-msg pt-8" *ngIf="userName.errors?.['minlength']">
+              <p>a Name must contain at least 3 Characters</p>
           </div>
-          <ul class="select-dropdown" *ngIf="dropdownOpen">
-            <li
-              *ngFor="let class of classesData.classes; let i = index"
-              (click)="selectClass(i)"
-              [class.selected]="i === selectedClassIndex"
-            >
-              {{ class.name }}
-            </li>
-          </ul>
-        </div>
-      </div>
-    <div class="game-info-container mt-64">
-        <div class="card">
-            <span><strong>{{ classesData.classes[selectedClassIndex].tag }} Attributes:</strong> </span>
-            <span>{{ attributeAdvantage }}</span>
-            <span>{{ attributeDisAdvantage }}</span>
+          }
 
+      </div>
+      <div class="select-container my-32 px-8">
+          <div class="custom-select">
+            <div class="select-header" (click)="toggleDropdown()">
+              <span>{{ classesData.classes[selectedClassIndex].name || 'Choose a faction' }}</span>
+              <span class="arrow" [class.open]="dropdownOpen">▼</span>
+            </div>
+            <ul class="select-dropdown" *ngIf="dropdownOpen">
+              <li
+                *ngFor="let class of classesData.classes; let i = index"
+                (click)="selectClass(i)"
+                [class.selected]="i === selectedClassIndex"
+              >
+                {{ class.name }}
+              </li>
+            </ul>
+          </div>
         </div>
-        <div class="card">
-            <span><strong>Starting Conditions:</strong></span>
-            <span>Start Money: {{ factionStartingMoney | currency }}</span>
-            <span>IT-Security Level: {{ factionItSecurityLevel }} %</span>
-            <span>Hardware Wallet Space: {{ factionWalletSpace }} Coins</span>
-        </div>
-    </div>
-    <div class="button-container mt-64">
-        <a routerLink="scores">Scores</a>
-        <a>Play</a>
-        <a>Story</a>
-        <a>Rules</a>
-    </div>
+      <div class="game-info-container mt-64">
+          <div class="card">
+              <span><strong>{{ classesData.classes[selectedClassIndex].tag }} Attributes:</strong> </span>
+              <span>{{ attributeAdvantage }}</span>
+              <span>{{ attributeDisAdvantage }}</span>
+
+          </div>
+          <div class="card">
+              <span><strong>Starting Conditions:</strong></span>
+              <span>Start Money: {{ factionStartingMoney | currency }}</span>
+              <span>IT-Security Level: {{ factionItSecurityLevel }} %</span>
+              <span>Hardware Wallet Space: {{ factionWalletSpace }} Coins</span>
+          </div>
+      </div>
+      <div class="button-container mt-64">
+          <a routerLink="scores">Scores</a>
+          <a routerLink="play">Play</a>
+          <a routerLink="story">Story</a>
+          <a routerLink="rules">Rules</a>
+      </div>
+    </form>
 </div>
 
 

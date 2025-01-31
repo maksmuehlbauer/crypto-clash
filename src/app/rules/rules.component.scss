@@ -6,7 +6,6 @@
 }
 
 .main-content {
-
     @include display($jc: flex-start);
     flex-direction: column;
 }
