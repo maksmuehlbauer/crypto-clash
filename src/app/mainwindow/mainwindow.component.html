@@ -1,7 +1,7 @@
 <div class="main-content">
     <h1>Crypto Clash</h1>
     <h2>The last Transaction</h2>
-    <form>
+    <form (ngSubmit)="onSubmit(startGame, $event, selectedClassIndex)" #startGame="ngForm">
       <div class="input-container mt-32">
           <input #userName="ngModel" [(ngModel)]="playerName" 
           type="playername" 
@@ -50,7 +50,7 @@
       </div>
       <div class="button-container mt-64">
           <a routerLink="scores">Scores</a>
-          <a routerLink="play">Play</a>
+          <button [class.btn-disabled]="startGame.form.invalid">Play</button>
           <a routerLink="story">Story</a>
           <a routerLink="rules">Rules</a>
       </div>

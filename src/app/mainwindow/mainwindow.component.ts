@@ -1,8 +1,8 @@
 import { Component, inject } from '@angular/core';
 import { GameServiceService } from '../game-service.service';
 import { CommonModule } from '@angular/common';
-import { FormsModule, NgModel } from '@angular/forms';
-import { RouterModule } from '@angular/router';
+import { FormsModule, NgModel, NgForm } from '@angular/forms';
+import { Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-mainwindow',
@@ -13,15 +13,20 @@ import { RouterModule } from '@angular/router';
 })
 export class MainwindowComponent {
 
-  // Default Stats
-  // startingMoney: number = 5000;
-  // itSecurityLevel: number = 15;
-  // hardwareWalletSpace: number = 100;  
+  constructor(private router: Router) {};
   
   classesData = inject(GameServiceService);
-  selectedClassIndex: number = 0;
   dropdownOpen = false;
+  selectedClassIndex: number = 0;
   playerName: string = ''
+  playerClass: string = 'ABN';
+
+  setPlayerDetails() {
+    this.classesData.playerDetails.playerName = this.playerName;
+    this.classesData.playerDetails.playerClass = this.playerClass;
+    this.classesData.playerDetails.selectedClassIndex = this.selectedClassIndex;
+    console.log(this.classesData.playerDetails)
+  }
 
   toggleDropdown() {
     this.dropdownOpen = !this.dropdownOpen;
@@ -30,9 +35,18 @@ export class MainwindowComponent {
   selectClass(index: number) {
     this.selectedClassIndex = index;
     this.dropdownOpen = false;
+    this.playerClass = this.classesData.classes[this.selectedClassIndex].tag;
   }
 
 
+  onSubmit(ngForm: NgForm, event: Event, selectedClassIndex: number) {
+    if (ngForm.submitted && ngForm.form.valid) {
+      this.router.navigate(['/game-board']);
+      // console.log(this.playerName + ' ' + this.playerClass)
+      this.setPlayerDetails();
+
+    }
+  }
 
   // a getter "get" refresh the variable at anytime they are called into the template
   get attributeAdvantage() {

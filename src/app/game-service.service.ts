@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { PlayerDetails } from './clash.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -6,6 +7,18 @@ import { Injectable } from '@angular/core';
 export class GameServiceService {
 
   constructor() { }
+
+  playerDetails: PlayerDetails = {
+    playerName: '',
+    playerClass: '',
+    selectedClassIndex: 0
+  }
+
+
+  scores = [
+    {name: 'max', class: 'ABN', score: 710000},
+    {name: 'lulu', class: 'DMH', score: 50000}
+  ]
 
   classes = [
     {

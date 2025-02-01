@@ -6,7 +6,36 @@
 }
 
 .main-content {
-
     @include display($jc: flex-start);
     flex-direction: column;
+    height: 600px;
+    overflow: hidden;
+    // overflow-y: scroll;
+    padding-right: 16px;
+}
+
+.scores-container {
+    width: 100%
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    tr {
+        text-align: left;
+        th {
+            font-weight: 900;
+            background-color: $secondary;
+            padding: 12px;
+        }
+        td {
+            padding: 12px;
+        }
+        &:nth-child(odd):not(:first-child) {
+            background-color: $btn-bg-color;
+        }
+        &:nth-child(even) {
+            background-color: $body-color;
+        }
+    }
 }
