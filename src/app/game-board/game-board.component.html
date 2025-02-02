@@ -23,7 +23,7 @@
         <div class="divider"></div>
         <div class="exchanges">
             <span class="title">Exchanges</span>
-            <button>ABN</button>
+            <button (click)="getRandomCurrencys()">ABN</button>
             <button>DMH</button>
             <button>BCE</button>
             <!-- <button>ACL</button> Later Feature -->
@@ -45,21 +45,21 @@
             <table>
                 <tr>
                     <th>Coin</th>
-                    <th>cost</th>
+                    <th class="txt-right">cost</th>
                 </tr>
-                <tr *ngFor="let currency of gameService.currencys; let i = index">
+                <tr *ngFor="let currency of dailyExchangeOffer; let i = index" (click)="buyCurrency(i)">
                     <td>{{ currency.tag }}</td>
                     <td class="txt-right">{{ currency.value | currency:'USD':'symbol':'1.0-2' }}</td>
                 </tr>
             </table>
         </div>
         <div class="hardware-wallet">
-            <span class="title">Hardware Wallet =  {{ currentWalletCount }} / {{ walletSpace }}</span>
+            <span class="title">Hardware Wallet =  {{ calculateWalletSpace }} / {{ walletSpace }}</span>
             <table>
                 <tr>
                     <th>Coin</th>
-                    <th>count</th>
-                    <th>at:buy</th>
+                    <th class="txt-right">count</th>
+                    <th class="txt-right">at:buy</th>
                 </tr>
                 <tr *ngFor="let position of wallet; let i = index">
                     <td>{{ position.tag }}</td>

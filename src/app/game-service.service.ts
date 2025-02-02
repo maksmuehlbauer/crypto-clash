@@ -38,17 +38,17 @@ export class GameServiceService {
     {
       name: 'Ripple',
       tag: 'XRP',
-      value: 1.5,
+      value: 15,
     },
     {
       name: 'Cardano',
       tag: 'ADA',
-      value: 2.2,
+      value: 920,
     },
     {
       name: 'Trump Coin',
       tag: 'TRUMP',
-      value: 64.000,
+      value: 64000,
     },
     {
       name: 'Musk Coin',
@@ -58,7 +58,7 @@ export class GameServiceService {
     {
       name: 'Shiba Inu',
       tag: 'SHIB',
-      value: 1.5,
+      value: 14,
     },
     {
       name: 'Dogecoin',

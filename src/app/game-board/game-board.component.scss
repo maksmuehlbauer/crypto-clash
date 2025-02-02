@@ -134,6 +134,10 @@ table {
     font-size: 14px;
     tr {
         text-align: left;
+        &:hover {
+            cursor: pointer;
+            background-color: $secondary !important;
+        }
         th {
             font-weight: 900;
             background-color: $secondary;
