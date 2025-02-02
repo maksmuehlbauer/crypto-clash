@@ -12,8 +12,8 @@
                     <!-- <h3>Defi USDC</h3> Later Feature -->
                 </div>
                 <div class="stats">
-                    <h4>{{ startMoney | currency }}</h4>
-                    <h4>{{ itSecurity | percent:'1.0-0'}}</h4>
+                    <h4>{{ currentMoney | currency }}</h4>
+                    <h4>{{ currentItSecurity| percent:'1.0-0'}}</h4>
                     <h4>{{ classTag }}</h4>
                     <h4>{{ startingDay }} / {{ finishDay }}</h4>
                 </div>
@@ -47,14 +47,14 @@
                     <th>Coin</th>
                     <th class="txt-right">cost</th>
                 </tr>
-                <tr *ngFor="let currency of dailyExchangeOffer; let i = index" (click)="buyCurrency(i)">
+                <tr *ngFor="let currency of dailyExchangeOffer; let i = index" (click)="gameService.openBuyCurrencyMenu(dailyExchangeOffer[i])">
                     <td>{{ currency.tag }}</td>
                     <td class="txt-right">{{ currency.value | currency:'USD':'symbol':'1.0-2' }}</td>
                 </tr>
             </table>
         </div>
         <div class="hardware-wallet">
-            <span class="title">Hardware Wallet =  {{ calculateWalletSpace }} / {{ walletSpace }}</span>
+            <span class="title">Hardware Wallet =  {{ calculateWalletSpace }} / {{ currentWalletSpace }}</span>
             <table>
                 <tr>
                     <th>Coin</th>
@@ -70,3 +70,4 @@
         </div>
    </div>
 </div>
+<app-buy-menu *ngIf="gameService.toggleBuyMenu"></app-buy-menu>

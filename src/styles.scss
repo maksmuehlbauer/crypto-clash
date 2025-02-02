@@ -118,6 +118,36 @@ h2 {
     border-radius: 5px;
   }
 
+  .background {
+    position: absolute;
+    right: 0;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    margin: 0;
+    padding: 0;
+    background-color: rgba(0, 0, 0, 0.4);
+    @include display();
+}
+
+.menu {
+    width: 400px;
+    height: 400px;
+    background-color: #5c5f63;
+    background-color: $game-bg-color;
+    border: 3px solid $btn-bg-color;
+    border-radius: 24px;
+    @include display();
+    flex-direction: column;
+}
+
+.back-menu {
+    z-index: 200;
+    &:hover {
+        cursor: pointer;
+    }
+}
+
 
 
 

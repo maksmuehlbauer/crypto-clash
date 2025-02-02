@@ -2,23 +2,30 @@ import { Component, inject, OnInit } from '@angular/core';
 import { GameServiceService } from '../game-service.service';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { BuyMenuComponent } from "../menues/buy-menu/buy-menu.component";
+
 
 @Component({
   selector: 'app-game-board',
   standalone: true,
-  imports: [RouterModule, CommonModule],
+  imports: [RouterModule, CommonModule, BuyMenuComponent],
   templateUrl: './game-board.component.html',
   styleUrl: './game-board.component.scss'
 })
 export class GameBoardComponent implements OnInit {
 
   gameService = inject(GameServiceService);
-  classIndex = this.gameService.playerDetails.selectedClassIndex;
-  currentWalletCount:number = 0;
+  
+
   startingDay:number = 0;
   finishDay:number = 30;
-  dailyExchangeOffer:any[] = []
-  dailyExchangeIndexes: any[] = []
+  dailyExchangeOffer:any[] = [];
+  dailyExchangeIndexes: any[] = [];
+  classIndex = this.gameService.playerDetails.selectedClassIndex;
+  currentMoney: number = this.startMoney;
+  currentWalletSpace:number = this.walletSpace;
+  currentWalletCount: number = 0;
+  currentItSecurity: number = this.itSecurity;
 
   wallet = [
     {
@@ -36,10 +43,12 @@ export class GameBoardComponent implements OnInit {
   ];
 
 
+
+
+
   ngOnInit(): void {
     this.getRandomCurrencys();
   }
-
 
   generateRandomIndexValue() {
     const min = 5;
@@ -75,41 +84,38 @@ export class GameBoardComponent implements OnInit {
     for (let i = 0; i < this.dailyExchangeIndexes.length; i++) {
       const currencyIndex = this.dailyExchangeIndexes[i];
       this.dailyExchangeOffer.push(this.gameService.currencys[currencyIndex])
-
       const defaultCurrencyValue = this.dailyExchangeOffer[i].value
       this.dailyExchangeOffer[i].value = Math.floor(defaultCurrencyValue * this.generateRandomPercentageValue())
     }
   };
 
-  buyCurrency(i: number) {
-    console.log('buy amount of ' + i)
-  }
+    // a getter "get" refresh the variable at anytime they are called into the template
+    get calculateWalletSpace() {
+      this.currentWalletCount = 0;
+      this.wallet.forEach(walletPos => {
+        this.currentWalletCount += walletPos.count
+      });
+      return this.currentWalletCount
+    }
+  
+    get walletSpace() {
+      return this.gameService.classes[this.classIndex].walletspace;
+    }
+  
+    get startMoney() {
+      return this.gameService.classes[this.classIndex].startMoney;
+    }
+  
+    get classTag() {
+      return this.gameService.classes[this.classIndex].tag;
+    }
+  
+    get itSecurity() {
+      return this.gameService.classes[this.classIndex].itSecurity;
+    }
 
 
-  // a getter "get" refresh the variable at anytime they are called into the template
-  get calculateWalletSpace() {
-    this.currentWalletCount = 0;
-    this.wallet.forEach(walletPos => {
-      this.currentWalletCount += walletPos.count
-    });
-    return this.currentWalletCount
-  }
 
-  get walletSpace() {
-    return this.gameService.classes[this.classIndex].walletspace;
-  }
-
-  get startMoney() {
-    return this.gameService.classes[this.classIndex].startMoney;
-  }
-
-  get classTag() {
-    return this.gameService.classes[this.classIndex].tag;
-  }
-
-  get itSecurity() {
-    return this.gameService.classes[this.classIndex].itSecurity;
-  }
 
 
 }
