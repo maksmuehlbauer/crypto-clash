@@ -1,6 +1,72 @@
-{{ gameService.playerDetails.playerName }}<br>
-{{ gameService.playerDetails.playerClass }}<br>
-{{ gameService.playerDetails.selectedClassIndex }}<br>
-<br>
-{{ gameService.classes[classIndex].startMoney }}<br>
-{{ gameService.classes[classIndex].name }}<br>
+<a routerLink="" class="back-btn"><img src="./assets/img/arrow-back.png" alt="" class=""></a>
+<div class="main-content">
+   <div class="row-1">
+        <div class="overview">
+            <span class="title">Overview</span>
+            <div>
+                <div class="stat-text">
+                    <h4>Money</h4>
+                    <h4>It-Security</h4>
+                    <h4>Class</h4>
+                    <h4>Day</h4>
+                    <!-- <h3>Defi USDC</h3> Later Feature -->
+                </div>
+                <div class="stats">
+                    <h4>{{ startMoney | currency }}</h4>
+                    <h4>{{ itSecurity | percent:'1.0-0'}}</h4>
+                    <h4>{{ classTag }}</h4>
+                    <h4>{{ startingDay }} / {{ finishDay }}</h4>
+                </div>
+            </div>
+
+        </div>
+        <div class="divider"></div>
+        <div class="exchanges">
+            <span class="title">Exchanges</span>
+            <button>ABN</button>
+            <button>DMH</button>
+            <button>BCE</button>
+            <!-- <button>ACL</button> Later Feature -->
+        </div>
+   </div>
+   <div class="row-2 mt-32">
+        <div class="controls">
+            <button>Buy</button>
+            <button>Sell</button>
+            <!-- <button>Shop</button>
+            <button>DeFi</button> -->
+            <!-- <button>Shop</button> Later Feature -->
+            <!-- <button>Defi</button> Later Feature -->
+        </div>
+   </div>
+   <div class="row-3 mt-32">
+        <div class="exchange-offer">
+            <span class="title">Exchange Offer</span>
+            <table>
+                <tr>
+                    <th>Coin</th>
+                    <th>cost</th>
+                </tr>
+                <tr *ngFor="let currency of gameService.currencys; let i = index">
+                    <td>{{ currency.tag }}</td>
+                    <td class="txt-right">{{ currency.value | currency:'USD':'symbol':'1.0-2' }}</td>
+                </tr>
+            </table>
+        </div>
+        <div class="hardware-wallet">
+            <span class="title">Hardware Wallet =  {{ currentWalletCount }} / {{ walletSpace }}</span>
+            <table>
+                <tr>
+                    <th>Coin</th>
+                    <th>count</th>
+                    <th>at:buy</th>
+                </tr>
+                <tr *ngFor="let position of wallet; let i = index">
+                    <td>{{ position.tag }}</td>
+                    <td class="txt-right">{{ position.count }}</td>
+                    <td class="txt-right">{{ position.buyAt | currency:'USD':'symbol':'1.0-2' }}</td>
+                </tr>
+            </table>
+        </div>
+   </div>
+</div>

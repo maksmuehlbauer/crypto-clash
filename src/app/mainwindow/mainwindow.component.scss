@@ -114,7 +114,7 @@ input {
     // background-color: lightblue;
     @include display($jc: space-between);
     >a, button {
-      font-size: 16px;
+        font-size: 16px;
         background-color: $btn-bg-color;
         color: $primary;
         border: none;
