@@ -14,9 +14,9 @@ import { BuyMenuComponent } from "../menues/buy-menu/buy-menu.component";
 })
 export class GameBoardComponent implements OnInit {
 
-  gameService = inject(GameServiceService);
-  
 
+
+  gameService = inject(GameServiceService);
   startingDay:number = 0;
   finishDay:number = 30;
   dailyExchangeOffer:any[] = [];
@@ -26,6 +26,8 @@ export class GameBoardComponent implements OnInit {
   currentWalletSpace:number = this.walletSpace;
   currentWalletCount: number = 0;
   currentItSecurity: number = this.itSecurity;
+  toggleBuyMenu: boolean = false;
+  selectedBuyIndex: number = 0;
 
   wallet = [
     {
@@ -42,13 +44,33 @@ export class GameBoardComponent implements OnInit {
     },
   ];
 
-
-
-
-
   ngOnInit(): void {
     this.getRandomCurrencys();
   }
+
+  sendingBuyValues = {
+    currMoney: this.currentMoney,
+    currWalletSpace: this.currentWalletSpace,
+    currWalletCount: this.currentWalletCount,
+    selectedCoin: this.dailyExchangeOffer[this.selectedBuyIndex]
+  }
+
+  openBuyCurrencyMenu(i: number) {
+    this.toggleBuyMenu = !this.toggleBuyMenu;
+    this.updateInputValues(i);
+  }
+
+  
+  updateInputValues(i: number) {
+    return this.sendingBuyValues = {
+      currMoney: this.currentMoney,
+      currWalletSpace: this.currentWalletSpace,
+      currWalletCount: this.currentWalletCount,
+      selectedCoin: this.dailyExchangeOffer[i]
+    }
+  }
+
+
 
   generateRandomIndexValue() {
     const min = 5;

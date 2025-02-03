@@ -15,17 +15,17 @@ export class MainwindowComponent {
 
   constructor(private router: Router) {};
   
-  classesData = inject(GameServiceService);
+  gameService = inject(GameServiceService);
   dropdownOpen = false;
   selectedClassIndex: number = 0;
   playerName: string = ''
   playerClass: string = 'ABN';
 
   setPlayerDetails() {
-    this.classesData.playerDetails.playerName = this.playerName;
-    this.classesData.playerDetails.playerClass = this.playerClass;
-    this.classesData.playerDetails.selectedClassIndex = this.selectedClassIndex;
-    console.log(this.classesData.playerDetails)
+    this.gameService.playerDetails.playerName = this.playerName;
+    this.gameService.playerDetails.playerClass = this.playerClass;
+    this.gameService.playerDetails.selectedClassIndex = this.selectedClassIndex;
+    // console.log(this.gameService.playerDetails)
   }
 
   toggleDropdown() {
@@ -35,7 +35,7 @@ export class MainwindowComponent {
   selectClass(index: number) {
     this.selectedClassIndex = index;
     this.dropdownOpen = false;
-    this.playerClass = this.classesData.classes[this.selectedClassIndex].tag;
+    this.playerClass = this.gameService.classes[this.selectedClassIndex].tag;
   }
 
 
@@ -50,23 +50,23 @@ export class MainwindowComponent {
 
   // a getter "get" refresh the variable at anytime they are called into the template
   get attributeAdvantage() {
-    return this.classesData.classes[this.selectedClassIndex].attributes.attOne.description;
+    return this.gameService.classes[this.selectedClassIndex].attributes.attOne.description;
   }
 
   get attributeDisAdvantage() {
-    return this.classesData.classes[this.selectedClassIndex].attributes.attTwo.description;
+    return this.gameService.classes[this.selectedClassIndex].attributes.attTwo.description;
   }
 
   get factionStartingMoney() {
-    return this.classesData.classes[this.selectedClassIndex].startMoney;
+    return this.gameService.classes[this.selectedClassIndex].startMoney;
   }
 
   get factionItSecurityLevel() {
-    return this.classesData.classes[this.selectedClassIndex].itSecurity;
+    return this.gameService.classes[this.selectedClassIndex].itSecurity;
   }
 
   get factionWalletSpace() {
-    return this.classesData.classes[this.selectedClassIndex].walletspace;
+    return this.gameService.classes[this.selectedClassIndex].walletspace;
   }
 
 

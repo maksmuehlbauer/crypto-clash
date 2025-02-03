@@ -20,12 +20,12 @@
       <div class="select-container my-32 px-8">
           <div class="custom-select">
             <div class="select-header" (click)="toggleDropdown()">
-              <span>{{ classesData.classes[selectedClassIndex].name || 'Choose a faction' }}</span>
+              <span>{{ gameService.classes[selectedClassIndex].name || 'Choose a faction' }}</span>
               <span class="arrow" [class.open]="dropdownOpen">▼</span>
             </div>
             <ul class="select-dropdown" *ngIf="dropdownOpen">
               <li
-                *ngFor="let class of classesData.classes; let i = index"
+                *ngFor="let class of gameService.classes; let i = index"
                 (click)="selectClass(i)"
                 [class.selected]="i === selectedClassIndex"
               >
@@ -36,7 +36,7 @@
         </div>
       <div class="game-info-container mt-64">
           <div class="card">
-              <span><strong>{{ classesData.classes[selectedClassIndex].tag }} Attributes:</strong> </span>
+              <span><strong>{{ gameService.classes[selectedClassIndex].tag }} Attributes:</strong> </span>
               <span>{{ attributeAdvantage }}</span>
               <span>{{ attributeDisAdvantage }}</span>
 

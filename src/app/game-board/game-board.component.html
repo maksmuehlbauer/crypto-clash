@@ -47,7 +47,7 @@
                     <th>Coin</th>
                     <th class="txt-right">cost</th>
                 </tr>
-                <tr *ngFor="let currency of dailyExchangeOffer; let i = index" (click)="gameService.openBuyCurrencyMenu(dailyExchangeOffer[i])">
+                <tr *ngFor="let currency of dailyExchangeOffer; let i = index" (click)="openBuyCurrencyMenu(i)">
                     <td>{{ currency.tag }}</td>
                     <td class="txt-right">{{ currency.value | currency:'USD':'symbol':'1.0-2' }}</td>
                 </tr>
@@ -70,4 +70,4 @@
         </div>
    </div>
 </div>
-<app-buy-menu *ngIf="gameService.toggleBuyMenu"></app-buy-menu>
+<app-buy-menu *ngIf="toggleBuyMenu" [buyValues]="sendingBuyValues"></app-buy-menu>

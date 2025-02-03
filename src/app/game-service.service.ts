@@ -14,20 +14,6 @@ export class GameServiceService {
     selectedClassIndex: 0
   }
 
-  toggleBuyMenu: boolean = false;
-  selectedCurrency: any = '';
-
-
-  closeMenu() {
-    this.toggleBuyMenu = false
-  }
-
-  openBuyCurrencyMenu(selectedCurrencyInfos: any) {
-    this.toggleBuyMenu = !this.toggleBuyMenu;
-    this.selectedCurrency = selectedCurrencyInfos
-    console.table(selectedCurrencyInfos)
-  }
-
 
   scores = [
     {name: 'max', class: 'ABN', score: 710000},
