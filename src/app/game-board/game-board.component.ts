@@ -52,7 +52,9 @@ export class GameBoardComponent implements OnInit {
     currMoney: this.currentMoney,
     currWalletSpace: this.currentWalletSpace,
     currWalletCount: this.currentWalletCount,
-    selectedCoin: this.dailyExchangeOffer[this.selectedBuyIndex]
+    toggleMenu: this.toggleBuyMenu,
+    selectedCoin: this.dailyExchangeOffer[this.selectedBuyIndex],
+    currWallet: this.wallet
   }
 
   openBuyCurrencyMenu(i: number) {
@@ -66,7 +68,9 @@ export class GameBoardComponent implements OnInit {
       currMoney: this.currentMoney,
       currWalletSpace: this.currentWalletSpace,
       currWalletCount: this.currentWalletCount,
-      selectedCoin: this.dailyExchangeOffer[i]
+      toggleMenu: this.toggleBuyMenu,
+      selectedCoin: this.dailyExchangeOffer[i],
+      currWallet: this.wallet
     }
   }
 

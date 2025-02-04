@@ -138,6 +138,22 @@ h2 {
     border-radius: 24px;
     @include display();
     flex-direction: column;
+    button {
+      padding: 16px 48px;
+      font-size: 16px;
+      background-color: $btn-bg-color;
+      color: $primary;
+      border: none;
+      text-align: center;
+      font-family: "Orbitron", sans-serif;
+      letter-spacing: 2px;
+      border-radius: 8px;
+      cursor: pointer;
+      &:hover {
+          background-color: #00C896;
+          color: #1A1C20;
+      }
+    }
 }
 
 .back-menu {
@@ -146,6 +162,8 @@ h2 {
         cursor: pointer;
     }
 }
+
+
 
 
 
