@@ -111,11 +111,8 @@ h2 {
     border-radius: 5px;
   }
   
-  .error {
-    background-color: #D72638;
-    color: #FFF;
-    padding: 10px;
-    border-radius: 5px;
+  .error-msg {
+    color: #D72638;
   }
 
   .background {
@@ -161,6 +158,15 @@ h2 {
     &:hover {
         cursor: pointer;
     }
+}
+
+.btn-disabled {
+  background-color: $primary !important;
+  color: lightgray !important;
+  &:hover {
+    background-color: $primary !important;
+    color: lightgray !important;
+  }
 }
 
 

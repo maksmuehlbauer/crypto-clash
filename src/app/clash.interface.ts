@@ -9,3 +9,15 @@ export interface PlayerDetails {
     playerClass: string
     selectedClassIndex: number;
   }
+
+export interface sendingValues {
+    toggleMenu: boolean;
+    currMoney: number;
+}
+
+export interface wallet {
+    name: string;
+    tag: string;
+    buyAt: number;
+    count: number;
+}

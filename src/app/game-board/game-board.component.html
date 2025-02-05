@@ -70,4 +70,4 @@
         </div>
    </div>
 </div>
-<app-buy-menu *ngIf="toggleBuyMenu" [buyValues]="sendingBuyValues"></app-buy-menu>
+<app-buy-menu *ngIf="toggleBuyMenu" [buyValues]="sendingBuyValues" (transaction)="receiveTransaction($event)"></app-buy-menu>

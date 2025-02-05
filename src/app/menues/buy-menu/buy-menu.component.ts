@@ -1,7 +1,8 @@
-import { Component, inject, Input, OnInit  } from '@angular/core';
+import { Component, inject, Input, OnInit, EventEmitter, Output  } from '@angular/core';
 import { GameServiceService } from '../../game-service.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { sendingValues } from '../../clash.interface';
 
 @Component({
   selector: 'app-buy-menu',
@@ -18,38 +19,48 @@ export class BuyMenuComponent implements OnInit {
     toggleMenu: boolean;
     selectedCoin: any;
     currWallet: any;
-  }
+  };
 
+  @Output() transaction = new EventEmitter<sendingValues>();
 
   gameService = inject(GameServiceService)
   buyAmount: number = 0;
 
 
+
   ngOnInit(): void {
     this.buyAmount = this.checkMaxPurchase
   }
-  
-  closeMenu() {
-    this.buyValues.toggleMenu = this.buyValues.toggleMenu; 
-  }
 
-  calculateCurrentWalletSpace() {
-    return this.buyValues.currWalletSpace - this.buyValues.currWalletCount
-
+  checkBuyOrder():boolean {
+    return this.buyAmount > 0 ? false : true;
   }
 
   acceptTransaction() {
     this.addToWallet();
-    this.calculateCurrentMoney();
-    window.close()
+    this.transaction.emit(this.sendUserAction(this.calculateCurrentMoney()))
   }
 
+  AbortTransaction() {
+    this.transaction.emit(this.sendUserAction(this.buyValues.currMoney))
+  }
+
+  sendUserAction(currentMoney: number) {
+    const data: sendingValues = {
+      toggleMenu: false,
+      currMoney: currentMoney
+    }
+    return data
+  }
 
   calculateCurrentMoney() {
     let totalCost = this.buyAmount * this.buyValues.selectedCoin.value
-    this.buyValues.currMoney -= totalCost;
+    return this.buyValues.currMoney -= totalCost;
   }
 
+  calculateCurrentWalletSpace() {
+    return this.buyValues.currWalletSpace - this.buyValues.currWalletCount
+  }
 
   addToWallet() {
     this.buyValues.currWallet.push(

@@ -3,6 +3,7 @@ import { GameServiceService } from '../game-service.service';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { BuyMenuComponent } from "../menues/buy-menu/buy-menu.component";
+import { sendingValues, wallet } from '../clash.interface';
 
 
 @Component({
@@ -13,6 +14,7 @@ import { BuyMenuComponent } from "../menues/buy-menu/buy-menu.component";
   styleUrl: './game-board.component.scss'
 })
 export class GameBoardComponent implements OnInit {
+
 
 
 
@@ -29,24 +31,34 @@ export class GameBoardComponent implements OnInit {
   toggleBuyMenu: boolean = false;
   selectedBuyIndex: number = 0;
 
-  wallet = [
-    {
-      name: 'Bitcoin',
-      tag: 'BTC',
-      buyAt: 175000,
-      count: 10
-    },
-    {
-      name: 'Musk Coin',
-      tag: 'MUSK',
-      buyAt: 6200,
-      count: 40
-    },
+  wallet: wallet[] = [
+    // {
+    //   name: 'Bitcoin',
+    //   tag: 'BTC',
+    //   buyAt: 175000,
+    //   count: 10
+    // },
+    // {
+    //   name: 'Musk Coin',
+    //   tag: 'MUSK',
+    //   buyAt: 6200,
+    //   count: 40
+    // },
   ];
+
+
+  receiveTransaction(data: sendingValues) {
+    const receiveBuyOrder = data
+    this.toggleBuyMenu = receiveBuyOrder.toggleMenu
+    this.currentMoney = receiveBuyOrder.currMoney
+  }
+
 
   ngOnInit(): void {
     this.getRandomCurrencys();
   }
+
+
 
   sendingBuyValues = {
     currMoney: this.currentMoney,

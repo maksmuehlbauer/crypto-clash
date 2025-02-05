@@ -1,4 +1,4 @@
-<button class="back-btn back-menu" (click)="closeMenu()"><img src="./assets/img/close.png" alt="" class=""></button>
+<button class="back-btn back-menu" (click)="AbortTransaction()"><img src="./assets/img/close.png" alt="" class=""></button>
 <div class="background">
     <div class="menu">
         <h2 class="mb-32">Buy {{ buyValues.selectedCoin.tag }}</h2>
@@ -6,15 +6,17 @@
             <div class="text-info">
                 <h3>Money</h3>
                 <h3>price per {{ buyValues.selectedCoin.tag }}</h3>
+                <h3>currentWalletSpace</h3>
                 <h3>Max. Purchase</h3>
             </div>
             <div class="buy-infos txt-right">
                 <h3>{{ buyValues.currMoney| currency:'USD':'symbol':'1.0-2' }}</h3>
                 <h3>{{ buyValues.selectedCoin.value| currency:'USD':'symbol':'1.0-2' }}</h3>
+                <h3>{{ buyValues.currWalletCount }} / {{ buyValues.currWalletSpace }}</h3>
                 <input [(ngModel)]="buyAmount" type="number" max="{{ checkMaxPurchase }}" min="0">
             </div> 
         </div>
-        <button class="mt-32" (click)="acceptTransaction()">Buy</button>
-        
+        <button class="mt-32" [class.btn-disabled]="checkBuyOrder()" (click)="acceptTransaction()" [disabled]="checkBuyOrder()">Buy</button>
+        <p *ngIf="checkBuyOrder()" class="error-msg mt-32">Insufficient amount of money or walletspace</p>
     </div>
 </div>
