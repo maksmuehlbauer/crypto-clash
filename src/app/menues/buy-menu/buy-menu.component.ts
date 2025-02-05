@@ -2,7 +2,7 @@ import { Component, inject, Input, OnInit, EventEmitter, Output  } from '@angula
 import { GameServiceService } from '../../game-service.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { sendingValues } from '../../clash.interface';
+import { BuyTransactionValues } from '../../clash.interface';
 
 @Component({
   selector: 'app-buy-menu',
@@ -12,24 +12,22 @@ import { sendingValues } from '../../clash.interface';
   styleUrl: './buy-menu.component.scss'
 })
 export class BuyMenuComponent implements OnInit {
+  
   @Input() buyValues!: {
     currMoney: number;
     currWalletSpace: number;
     currWalletCount: number;
-    toggleMenu: boolean;
     selectedCoin: any;
     currWallet: any;
   };
 
-  @Output() transaction = new EventEmitter<sendingValues>();
+  @Output() buyTransaction = new EventEmitter<BuyTransactionValues>(); //BuyTransactionValues = interface
 
   gameService = inject(GameServiceService)
   buyAmount: number = 0;
 
-
-
   ngOnInit(): void {
-    this.buyAmount = this.checkMaxPurchase
+    this.buyAmount = this.calculateMaxPurchase
   }
 
   checkBuyOrder():boolean {
@@ -38,19 +36,19 @@ export class BuyMenuComponent implements OnInit {
 
   acceptTransaction() {
     this.addToWallet();
-    this.transaction.emit(this.sendUserAction(this.calculateCurrentMoney()))
+    this.buyTransaction.emit(this.receiveUserAction(this.calculateCurrentMoney()))
   }
 
   AbortTransaction() {
-    this.transaction.emit(this.sendUserAction(this.buyValues.currMoney))
+    this.buyTransaction.emit(this.receiveUserAction(this.buyValues.currMoney))
   }
 
-  sendUserAction(currentMoney: number) {
-    const data: sendingValues = {
+  receiveUserAction(currentMoney: number) {
+    const transactionData: BuyTransactionValues = {
       toggleMenu: false,
       currMoney: currentMoney
     }
-    return data
+    return transactionData
   }
 
   calculateCurrentMoney() {
@@ -72,19 +70,14 @@ export class BuyMenuComponent implements OnInit {
     },)
   }
 
-
   // getter Funtions refreshes, only read
   get maxPurchase() {
     return Math.floor(this.buyValues.currMoney / this.buyValues.selectedCoin.value);
   }
 
-  get checkMaxPurchase() {
-    const maxMoney = this.maxPurchase 
-    const walletSpace = this.calculateCurrentWalletSpace(); 
-    return Math.min(maxMoney, walletSpace) // return the lower Value from both
+  get calculateMaxPurchase() {
+    const maxMoneyPurchase = this.maxPurchase 
+    const maxWalletSpacePurchase = this.calculateCurrentWalletSpace(); 
+    return Math.min(maxMoneyPurchase, maxWalletSpacePurchase) // return the lowest Value
   }
-
-
-
-
 }

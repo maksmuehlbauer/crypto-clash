@@ -1,6 +1,6 @@
 <a routerLink="" class="back-btn"><img src="./assets/img/arrow-back.png" alt="" class=""></a>
 <div class="main-content">
-   <div class="row-1">
+   <div class="row-1 mt-24">
         <div class="overview">
             <span class="title">Overview</span>
             <div>
@@ -47,7 +47,7 @@
                     <th>Coin</th>
                     <th class="txt-right">cost</th>
                 </tr>
-                <tr *ngFor="let currency of dailyExchangeOffer; let i = index" (click)="openBuyCurrencyMenu(i)">
+                <tr *ngFor="let currency of dailyExchangeOffer; let i = index" (click)="openBuyOrder(i)">
                     <td>{{ currency.tag }}</td>
                     <td class="txt-right">{{ currency.value | currency:'USD':'symbol':'1.0-2' }}</td>
                 </tr>
@@ -70,4 +70,4 @@
         </div>
    </div>
 </div>
-<app-buy-menu *ngIf="toggleBuyMenu" [buyValues]="sendingBuyValues" (transaction)="receiveTransaction($event)"></app-buy-menu>
+<app-buy-menu *ngIf="toggleBuyMenu" [buyValues]="sendingBuyValues" (buyTransaction)="receiveTransaction($event)"></app-buy-menu>

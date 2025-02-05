@@ -3,7 +3,7 @@ import { GameServiceService } from '../game-service.service';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { BuyMenuComponent } from "../menues/buy-menu/buy-menu.component";
-import { sendingValues, wallet } from '../clash.interface';
+import { BuyTransactionValues, wallet } from '../clash.interface';
 
 
 @Component({
@@ -14,11 +14,8 @@ import { sendingValues, wallet } from '../clash.interface';
   styleUrl: './game-board.component.scss'
 })
 export class GameBoardComponent implements OnInit {
-
-
-
-
   gameService = inject(GameServiceService);
+
   startingDay:number = 0;
   finishDay:number = 30;
   dailyExchangeOffer:any[] = [];
@@ -30,7 +27,6 @@ export class GameBoardComponent implements OnInit {
   currentItSecurity: number = this.itSecurity;
   toggleBuyMenu: boolean = false;
   selectedBuyIndex: number = 0;
-
   wallet: wallet[] = [
     // {
     //   name: 'Bitcoin',
@@ -45,12 +41,12 @@ export class GameBoardComponent implements OnInit {
     //   count: 40
     // },
   ];
-
-
-  receiveTransaction(data: sendingValues) {
-    const receiveBuyOrder = data
-    this.toggleBuyMenu = receiveBuyOrder.toggleMenu
-    this.currentMoney = receiveBuyOrder.currMoney
+  sendingBuyValues = {
+    currMoney: this.currentMoney,
+    currWalletSpace: this.currentWalletSpace,
+    currWalletCount: this.currentWalletCount,
+    selectedCoin: this.dailyExchangeOffer[this.selectedBuyIndex],
+    currWallet: this.wallet
   }
 
 
@@ -58,18 +54,15 @@ export class GameBoardComponent implements OnInit {
     this.getRandomCurrencys();
   }
 
-
-
-  sendingBuyValues = {
-    currMoney: this.currentMoney,
-    currWalletSpace: this.currentWalletSpace,
-    currWalletCount: this.currentWalletCount,
-    toggleMenu: this.toggleBuyMenu,
-    selectedCoin: this.dailyExchangeOffer[this.selectedBuyIndex],
-    currWallet: this.wallet
+  
+  receiveTransaction(data: BuyTransactionValues) {
+    const receiveBuyOrder = data
+    this.toggleBuyMenu = receiveBuyOrder.toggleMenu
+    this.currentMoney = receiveBuyOrder.currMoney
   }
 
-  openBuyCurrencyMenu(i: number) {
+
+  openBuyOrder(i: number) {
     this.toggleBuyMenu = !this.toggleBuyMenu;
     this.updateInputValues(i);
   }
@@ -80,13 +73,10 @@ export class GameBoardComponent implements OnInit {
       currMoney: this.currentMoney,
       currWalletSpace: this.currentWalletSpace,
       currWalletCount: this.currentWalletCount,
-      toggleMenu: this.toggleBuyMenu,
       selectedCoin: this.dailyExchangeOffer[i],
       currWallet: this.wallet
     }
   }
-
-
 
   generateRandomIndexValue() {
     const min = 5;
@@ -151,9 +141,4 @@ export class GameBoardComponent implements OnInit {
     get itSecurity() {
       return this.gameService.classes[this.classIndex].itSecurity;
     }
-
-
-
-
-
 }

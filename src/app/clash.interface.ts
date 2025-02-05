@@ -10,7 +10,7 @@ export interface PlayerDetails {
     selectedClassIndex: number;
   }
 
-export interface sendingValues {
+export interface BuyTransactionValues {
     toggleMenu: boolean;
     currMoney: number;
 }
