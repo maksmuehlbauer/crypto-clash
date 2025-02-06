@@ -1,0 +1,22 @@
+<div class="background">
+    <div class="menu">
+        <button class="back-btn back-menu" (click)="AbortTransaction()"><img src="./assets/img/close.png" alt="" class=""></button>
+        <h2 class="mb-32">Sell {{ currWalletEntry.tag }}</h2>
+        <div class="sell-menu">
+            <div class="text-info">
+                <h3>bought at</h3>
+                <h3>current {{ currWalletEntry.tag }} Price</h3>
+                <h3>Max. Sell Amount</h3>
+                <h3>profit</h3>
+            </div>
+            <div class="sell-infos txt-right">
+                <h3>{{ currWalletEntry.buyAt | currency:'USD':'symbol':'1.0-2' }}</h3>
+                <h3>{{ sellValues.currCoinPrice.value| currency:'USD':'symbol':'1.0-2'  }}</h3>
+                <input [(ngModel)]="sellAmount" type="number" max="{{ maxSellAmount }}" min="0">
+                <h3>{{ maxProfit | currency:'USD':'symbol':'1.0-2'  }}</h3>
+            </div> 
+        </div>
+        <button class="mt-32" [class.btn-disabled]="" (click)="acceptTransaction()" [disabled]="checkSellOrder()">Sell</button>
+        <!-- <p *ngIf="checkBuyOrder()" class="error-msg mt-32">Insufficient amount of money or walletspace</p> -->
+    </div>
+</div>

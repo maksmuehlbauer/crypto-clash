@@ -23,20 +23,17 @@
         <div class="divider"></div>
         <div class="exchanges">
             <span class="title">Exchanges</span>
-            <button (click)="getRandomCurrencys()">ABN</button>
-            <button>DMH</button>
-            <button>BCE</button>
+            <button (click)="nextDay()">Asia Bot Exchange</button>
+            <button (click)="nextDay()">Donald Musk Trading</button>
+            <button (click)="nextDay()">European Stoxx Room</button>
             <!-- <button>ACL</button> Later Feature -->
         </div>
    </div>
    <div class="row-2 mt-32">
         <div class="controls">
-            <button>Buy</button>
-            <button>Sell</button>
-            <!-- <button>Shop</button>
-            <button>DeFi</button> -->
             <!-- <button>Shop</button> Later Feature -->
             <!-- <button>Defi</button> Later Feature -->
+            <p> {{ qoute }} </p>
         </div>
    </div>
    <div class="row-3 mt-32">
@@ -61,7 +58,7 @@
                     <th class="txt-right">count</th>
                     <th class="txt-right">at:buy</th>
                 </tr>
-                <tr *ngFor="let position of wallet; let i = index">
+                <tr *ngFor="let position of wallet; let i = index" (click)="openSellOrder(i)">
                     <td>{{ position.tag }}</td>
                     <td class="txt-right">{{ position.count }}</td>
                     <td class="txt-right">{{ position.buyAt | currency:'USD':'symbol':'1.0-2' }}</td>
@@ -71,3 +68,4 @@
    </div>
 </div>
 <app-buy-menu *ngIf="toggleBuyMenu" [buyValues]="sendingBuyValues" (buyTransaction)="receiveTransaction($event)"></app-buy-menu>
+<app-sell-menu *ngIf="toggleSellMenu" [sellValues]="sendingSellValues"></app-sell-menu>
