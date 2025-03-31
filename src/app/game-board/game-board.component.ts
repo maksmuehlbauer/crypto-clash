@@ -5,12 +5,13 @@ import { CommonModule } from '@angular/common';
 import { BuyMenuComponent } from '../menues/buy-menu/buy-menu.component';
 import { BuyTransactionValues, wallet } from '../clash.interface';
 import { SellMenuComponent } from "../menues/sell-menu/sell-menu.component";
+import { InfoMenuComponent } from "../menues/info-menu/info-menu.component";
 
 
 @Component({
   selector: 'app-game-board',
   standalone: true,
-  imports: [RouterModule, CommonModule, BuyMenuComponent, SellMenuComponent],
+  imports: [RouterModule, CommonModule, BuyMenuComponent, SellMenuComponent, InfoMenuComponent],
   templateUrl: './game-board.component.html',
   styleUrl: './game-board.component.scss'
 })
@@ -28,6 +29,7 @@ export class GameBoardComponent implements OnInit {
   currentItSecurity: number = this.itSecurity;
   toggleBuyMenu: boolean = false;
   toggleSellMenu: boolean = false;
+  toggleInfoMenu: boolean = false;
   selectedBuyIndex: number = 0;
   wallet: wallet[] = [
     {
@@ -41,6 +43,12 @@ export class GameBoardComponent implements OnInit {
       tag: 'MUSK',
       buyAt: 6200,
       count: 10
+    },
+    {
+      name: 'TEST',
+      tag: 'TEST',
+      buyAt: 1,
+      count: 1
     },
   ];
   sendingBuyValues = {
@@ -73,14 +81,13 @@ export class GameBoardComponent implements OnInit {
       }
       this.toggleSellMenu = !this.toggleSellMenu
     } else {
-      alert('cant sell coin on this Exchange')
+      this.openInfoMenu()
     }
-
-
-
-
   }
 
+  openInfoMenu() {
+    this.toggleInfoMenu = !this.toggleInfoMenu
+  }
 
   ngOnInit(): void {
     this.getRandomCurrencys();
@@ -109,6 +116,10 @@ export class GameBoardComponent implements OnInit {
     const receiveBuyOrder = data
     this.toggleBuyMenu = receiveBuyOrder.toggleMenu
     this.currentMoney = receiveBuyOrder.currMoney
+  }
+
+  receiveInfoMsg(newState: boolean) {
+    this.toggleInfoMenu = newState
   }
 
 
