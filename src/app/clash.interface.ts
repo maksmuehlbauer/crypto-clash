@@ -15,6 +15,11 @@ export interface BuyTransactionValues {
     currMoney: number;
 }
 
+export interface SellTransactionValues {
+    toggleMenu: boolean;
+    currMoney: number;
+}
+
 export interface wallet {
     name: string;
     tag: string;

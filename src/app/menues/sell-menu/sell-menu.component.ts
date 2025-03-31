@@ -1,6 +1,7 @@
 import { Component, inject, Input, OnInit, EventEmitter, Output  } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { SellTransactionValues } from '../../clash.interface';
 
 @Component({
   selector: 'app-sell-menu',
@@ -18,7 +19,7 @@ export class SellMenuComponent implements OnInit{
     currWalletIndex: number;
   }
 
-  
+  @Output() sellTransaction = new EventEmitter<SellTransactionValues>(); //SellTransactionValues = interface
 
   sellAmount: number = 0;
 
@@ -26,17 +27,47 @@ export class SellMenuComponent implements OnInit{
     this.sellAmount = this.maxSellAmount
   }
 
-  AbortTransaction() {
+  acceptTransaction() {
+    if (this.checkSellCount()) {
+      this.updateWalletCounts();
+    } else {
+      this.deleteIndexFromWallet();
+    }
+    this.sellTransaction.emit(this.receiveUserAction(this.calculateCurrentMoney()))
+  }
 
+  AbortTransaction() {
+    this.sellTransaction.emit(this.receiveUserAction(this.sellValues.currMoney))
+  }
+
+  receiveUserAction(currentMoney: number) {
+    const transactionData: SellTransactionValues = {
+      toggleMenu: false,
+      currMoney: currentMoney
+    }
+    return transactionData
+  }
+
+  deleteIndexFromWallet() {
+    this.sellValues.currWallet.splice(this.sellValues.currWalletIndex, 1)
+  }
+
+  updateWalletCounts() {
+    this.currWalletEntry.count -= this.sellAmount
+  }
+
+  checkSellCount() {
+    return this.sellAmount < this.currWalletEntry.count
   }
 
   checkSellOrder() {
 
   }
 
-  acceptTransaction() {
-    console.log(this.sellValues.currWallet)
-    this.sellValues.currWallet.splice(this.sellValues.currWalletIndex, 1)
+
+
+  calculateCurrentMoney() {
+    return this.sellValues.currMoney += this.maxProfit
   }
 
   get maxSellAmount(): number {

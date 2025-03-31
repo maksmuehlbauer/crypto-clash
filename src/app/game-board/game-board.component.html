@@ -67,6 +67,6 @@
         </div>
    </div>
 </div>
-<app-buy-menu *ngIf="toggleBuyMenu" [buyValues]="sendingBuyValues" (buyTransaction)="receiveTransaction($event)"></app-buy-menu>
-<app-sell-menu *ngIf="toggleSellMenu" [sellValues]="sendingSellValues"></app-sell-menu>
+<app-buy-menu *ngIf="toggleBuyMenu" [buyValues]="sendingBuyValues" (buyTransaction)="receiveBuyTransaction($event)"></app-buy-menu>
+<app-sell-menu *ngIf="toggleSellMenu" [sellValues]="sendingSellValues" (sellTransaction)="receiveSellTransaction($event)"></app-sell-menu>
 <app-info-menu *ngIf="toggleInfoMenu" (closeMenu)="receiveInfoMsg($event)"></app-info-menu>

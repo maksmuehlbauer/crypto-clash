@@ -13,7 +13,14 @@
                 <h3>{{ buyValues.currMoney | currency:'USD':'symbol':'1.0-2' }}</h3>
                 <h3>{{ buyValues.selectedCoin.value| currency:'USD':'symbol':'1.0-2' }}</h3>
                 <h3>{{ buyValues.currWalletCount }} / {{ buyValues.currWalletSpace }}</h3>
-                <input [(ngModel)]="buyAmount" type="number" max="{{ calculateMaxPurchase }}" min="0">
+                <input 
+                [(ngModel)]="buyAmount"
+                type="number"
+                [value]="calculateMaxPurchase"
+                [min]="0"
+                [max]="calculateMaxPurchase"
+                (input)="validateInput($event)"
+                >
             </div> 
         </div>
         <button class="mt-32" [class.btn-disabled]="checkBuyOrder()" (click)="acceptTransaction()" [disabled]="checkBuyOrder()">Buy</button>

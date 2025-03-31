@@ -3,7 +3,7 @@ import { GameServiceService } from '../game-service.service';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { BuyMenuComponent } from '../menues/buy-menu/buy-menu.component';
-import { BuyTransactionValues, wallet } from '../clash.interface';
+import { BuyTransactionValues, SellTransactionValues, wallet } from '../clash.interface';
 import { SellMenuComponent } from "../menues/sell-menu/sell-menu.component";
 import { InfoMenuComponent } from "../menues/info-menu/info-menu.component";
 
@@ -81,6 +81,7 @@ export class GameBoardComponent implements OnInit {
       }
       this.toggleSellMenu = !this.toggleSellMenu
     } else {
+      // coin not found on exchange
       this.openInfoMenu()
     }
   }
@@ -112,10 +113,16 @@ export class GameBoardComponent implements OnInit {
 
   }
   
-  receiveTransaction(data: BuyTransactionValues) {
-    const receiveBuyOrder = data
-    this.toggleBuyMenu = receiveBuyOrder.toggleMenu
-    this.currentMoney = receiveBuyOrder.currMoney
+  receiveBuyTransaction(data: BuyTransactionValues) {
+    const receiveBuyOrder = data;
+    this.toggleBuyMenu = receiveBuyOrder.toggleMenu;
+    this.currentMoney = receiveBuyOrder.currMoney;
+  }
+
+  receiveSellTransaction(data: SellTransactionValues) {
+    const receiveSellOrder = data;
+    this.toggleSellMenu = receiveSellOrder.toggleMenu;
+    this.currentMoney = receiveSellOrder.currMoney
   }
 
   receiveInfoMsg(newState: boolean) {
