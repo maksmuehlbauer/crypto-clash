@@ -19,7 +19,7 @@ import { GameEndMenuComponent } from "../menues/game-end-menu/game-end-menu.comp
 export class GameBoardComponent implements OnInit {
   gameService = inject(GameServiceService);
 
-  startingDay:number = 0;
+  startingDay:number = 29;
   finishDay:number = 30;
   dailyExchangeOffer:any[] = [];
   dailyExchangeIndexes: any[] = [];

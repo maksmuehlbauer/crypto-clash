@@ -1,7 +1,7 @@
 import { Component, Input, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { GameServiceService } from '../../game-service.service';
-import { Router, RouterModule } from '@angular/router';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-game-end-menu',
@@ -11,8 +11,6 @@ import { Router, RouterModule } from '@angular/router';
   styleUrl: './game-end-menu.component.scss'
 })
 export class GameEndMenuComponent {
-
-  constructor(private router: Router) {};
 
   gameService = inject(GameServiceService)
 
@@ -25,14 +23,6 @@ export class GameEndMenuComponent {
 
   @Input() playerScore!: {
     currMoney: number;
-  }
-
-  navigateMainMenu() {
-    this.router.navigate(['']);
-  }
-
-  navigateScores() {
-    this.router.navigate(['/scores']);
   }
 
   findPlayerClassName() {
