@@ -14,19 +14,19 @@ export class GameServiceService {
     selectedClassIndex: 0
   }
 
-  quotes = [
-    "We will make America great again. - Donald Trump",
-    "Amerika will never Forget your Trade, its a conclusion of national security - unknown",
-    "Innovation is the key to the future. - Elon Musk",
-    "Brexit means Brexit. - Boris Johnson",
-    "Bitcoin is the future of money. - Michael Saylor",
-    "Fake news is the enemy of the people. - Donald Trump",
-    "Failure is an option here. If things are not failing, you are not innovating enough. - Elon Musk",
-    "Let’s get Brexit done. - Boris Johnson",
-    "Bitcoin is a swarm of cyberhornets. - Michael Saylor",
-    "I love the poorly educated. - Donald Trump",
-    "Persistence is very important. You should not give up unless you are forced to give up. - Elon Musk"
-]
+//   quotes = [
+//     "We will make America great again. - Donald Trump",
+//     "Amerika will never Forget your Trade, its a conclusion of national security - unknown",
+//     "Innovation is the key to the future. - Elon Musk",
+//     "Brexit means Brexit. - Boris Johnson",
+//     "Bitcoin is the future of money. - Michael Saylor",
+//     "Fake news is the enemy of the people. - Donald Trump",
+//     "Failure is an option here. If things are not failing, you are not innovating enough. - Elon Musk",
+//     "Let’s get Brexit done. - Boris Johnson",
+//     "Bitcoin is a swarm of cyberhornets. - Michael Saylor",
+//     "I love the poorly educated. - Donald Trump",
+//     "Persistence is very important. You should not give up unless you are forced to give up. - Elon Musk"
+// ]
 
 
   scores = [

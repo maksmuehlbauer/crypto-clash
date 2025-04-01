@@ -34,22 +34,6 @@ export class BuyMenuComponent implements OnInit {
     return this.buyAmount <= 0 || this.buyAmount > this.calculateMaxPurchase;
   }
 
-  validateInput(event: Event): void {
-    const inputElement = event.target as HTMLInputElement;
-    let value = Number(inputElement.value);
-    if (value > this.calculateMaxPurchase) {
-      this.buyAmount = this.calculateMaxPurchase;
-    } else {
-      this.buyAmount = value;
-    }
-  }
-
-
-  // checkBuyOrder():boolean {
-  //   return this.buyAmount > 0 ? false : true;
-  // }
-
-
   acceptTransaction() {
     this.addToWallet();
     this.buyTransaction.emit(this.receiveUserAction(this.calculateCurrentMoney()))
@@ -95,5 +79,9 @@ export class BuyMenuComponent implements OnInit {
     const maxMoneyPurchase = this.maxPurchase 
     const maxWalletSpacePurchase = this.calculateCurrentWalletSpace(); 
     return Math.min(maxMoneyPurchase, maxWalletSpacePurchase) // return the lowest Value
+  }
+
+  get purchaseAmount(): number {
+    return this.buyValues.selectedCoin.value * this.buyAmount
   }
 }

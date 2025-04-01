@@ -6,19 +6,20 @@ import { BuyMenuComponent } from '../menues/buy-menu/buy-menu.component';
 import { BuyTransactionValues, SellTransactionValues, wallet } from '../clash.interface';
 import { SellMenuComponent } from "../menues/sell-menu/sell-menu.component";
 import { InfoMenuComponent } from "../menues/info-menu/info-menu.component";
+import { GameEndMenuComponent } from "../menues/game-end-menu/game-end-menu.component";
 
 
 @Component({
   selector: 'app-game-board',
   standalone: true,
-  imports: [RouterModule, CommonModule, BuyMenuComponent, SellMenuComponent, InfoMenuComponent],
+  imports: [RouterModule, CommonModule, BuyMenuComponent, SellMenuComponent, InfoMenuComponent, GameEndMenuComponent],
   templateUrl: './game-board.component.html',
   styleUrl: './game-board.component.scss'
 })
 export class GameBoardComponent implements OnInit {
   gameService = inject(GameServiceService);
 
-  startingDay:number = 28;
+  startingDay:number = 0;
   finishDay:number = 30;
   dailyExchangeOffer:any[] = [];
   dailyExchangeIndexes: any[] = [];
@@ -30,6 +31,7 @@ export class GameBoardComponent implements OnInit {
   toggleBuyMenu: boolean = false;
   toggleSellMenu: boolean = false;
   toggleInfoMenu: boolean = false;
+  toggleGameEndMenu: boolean = false;
   selectedBuyIndex: number = 0;
   wallet: wallet[] = [
     {
@@ -64,7 +66,15 @@ export class GameBoardComponent implements OnInit {
     currCoinPrice: this.dailyExchangeOffer[0],
     currWalletIndex: 0
   }
-  qoute: string = this.gameService.quotes[1]
+  sendProfitScore = {
+    currMoney: this.currentMoney
+  }
+  // qoute: string = this.gameService.quotes[1]
+
+  ngOnInit(): void {
+    this.getRandomCurrencys();
+  }
+
 
   openSellOrder(i: number) {
     let selectedCoin = this.wallet[i]
@@ -73,12 +83,7 @@ export class GameBoardComponent implements OnInit {
       selectedCoin.tag === coinInExchange.tag 
     );
     if(index !== -1) {
-      this.sendingSellValues = {
-        currMoney: this.currentMoney,
-        currWallet: this.wallet,
-        currCoinPrice: this.dailyExchangeOffer[index],
-        currWalletIndex: i
-      }
+      this.updateSellValues(index, i)
       this.toggleSellMenu = !this.toggleSellMenu
     } else {
       // coin not found on exchange
@@ -86,31 +91,36 @@ export class GameBoardComponent implements OnInit {
     }
   }
 
+  updateSellValues(index: number, i: number) {
+    return this.sendingSellValues = {
+      currMoney: this.currentMoney,
+      currWallet: this.wallet,
+      currCoinPrice: this.dailyExchangeOffer[index],
+      currWalletIndex: i
+    }
+  }
+
+  
   openInfoMenu() {
     this.toggleInfoMenu = !this.toggleInfoMenu
   }
 
-  ngOnInit(): void {
-    this.getRandomCurrencys();
-    // this.changeQuotes()
-  }
 
   nextDay() {
     this.startingDay++
     this.getRandomCurrencys()
     if (this.startingDay > this.finishDay ) {
-      alert('game Complete')
       this.startingDay = 30;
+      this.toggleGameEndMenu = !this.toggleGameEndMenu
+
     }
+    this.updateFinalScore();
   }
 
-  changeQuotes() {
-    let currentQuote = 0;
-    setInterval(() => {
-      currentQuote = (currentQuote + 1) % this.gameService.quotes.length;
-      this.qoute = this.gameService.quotes[currentQuote];
-    }, 1000 );
-
+  updateFinalScore() {
+    return this.sendProfitScore = {
+      currMoney: this.currentMoney
+    }
   }
   
   receiveBuyTransaction(data: BuyTransactionValues) {
@@ -132,11 +142,11 @@ export class GameBoardComponent implements OnInit {
 
   openBuyOrder(i: number) {
     this.toggleBuyMenu = !this.toggleBuyMenu;
-    this.updateInputValues(i);
+    this.updateBuyValues(i);
   }
 
   
-  updateInputValues(i: number) {
+  updateBuyValues(i: number) {
     return this.sendingBuyValues = {
       currMoney: this.currentMoney,
       currWalletSpace: this.currentWalletSpace,

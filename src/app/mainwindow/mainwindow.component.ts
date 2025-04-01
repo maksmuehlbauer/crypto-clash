@@ -25,7 +25,6 @@ export class MainwindowComponent {
     this.gameService.playerDetails.playerName = this.playerName;
     this.gameService.playerDetails.playerClass = this.playerClass;
     this.gameService.playerDetails.selectedClassIndex = this.selectedClassIndex;
-    // console.log(this.gameService.playerDetails)
   }
 
   toggleDropdown() {

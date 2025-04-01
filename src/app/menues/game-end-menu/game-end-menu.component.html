@@ -1,0 +1,25 @@
+<div class="background">
+    <div class="menu">
+        <h2 class="mb-32">Game End</h2>
+        <div class="score-menu">
+            <div class="text-info">
+                <h3>Playername</h3>
+                <h3>Class</h3>
+                <h3>Class Name</h3>
+                <h3>Profit</h3>
+            </div>
+            <div class="buy-infos txt-right">
+                <h3>{{ playerName }}</h3>
+                <h3>{{ playerClassTag }}</h3>
+                <h3>{{ findPlayerClassName() }}</h3>
+                <h3>{{ finalProfit | currency:'USD':'symbol':'1.0-2' }}</h3>
+            </div> 
+
+       </div>
+       <div>
+            <button (click)="navigateMainMenu()">Main Menu</button>
+            <button (click)="navigateScores()">Scores</button>
+       </div>
+
+    </div>
+</div>

@@ -12,11 +12,18 @@
             <div class="sell-infos txt-right">
                 <h3>{{ currWalletEntry.buyAt | currency:'USD':'symbol':'1.0-2' }}</h3>
                 <h3>{{ sellValues.currCoinPrice.value| currency:'USD':'symbol':'1.0-2'  }}</h3>
-                <input [(ngModel)]="sellAmount" type="number" max="{{ maxSellAmount }}" min="0">
-                <h3>{{ maxProfit | currency:'USD':'symbol':'1.0-2'  }}</h3>
+                <input 
+                [(ngModel)]="sellAmount" 
+                type="number" 
+                [max]="maxSellAmount" 
+                [min]="0"
+                >
             </div> 
         </div>
-        <button class="mt-32" [class.btn-disabled]="" (click)="acceptTransaction()" [disabled]="checkSellOrder()">Sell</button>
-        <!-- <p *ngIf="checkBuyOrder()" class="error-msg mt-32">Insufficient amount of money or walletspace</p> -->
+        <button class="mt-32" 
+        [class.btn-disabled]="checkSellOrder()" 
+        (click)="acceptTransaction()" 
+        [disabled]="checkSellOrder()">Sell for {{ maxProfit | currency:'USD':'symbol':'1.0-2'}}</button>
+        <p *ngIf="checkSellOrder()" class="error-msg mt-32">Insufficient quantity of coins for sale</p>
     </div>
 </div>

@@ -61,7 +61,8 @@ export class SellMenuComponent implements OnInit{
   }
 
   checkSellOrder() {
-
+    return this.sellAmount <= 0 || this.sellAmount > this.maxSellAmount
+    // return this.buyAmount <= 0 || this.buyAmount > this.calculateMaxPurchase;
   }
 
 
@@ -70,11 +71,11 @@ export class SellMenuComponent implements OnInit{
     return this.sellValues.currMoney += this.maxProfit
   }
 
-  get maxSellAmount(): number {
+  get maxSellAmount():number {
     return this.currWalletEntry.count
   }
 
-  get maxProfit(): number {
+  get maxProfit():number {
     return this.sellAmount * this.sellValues.currCoinPrice.value;
   }
 
