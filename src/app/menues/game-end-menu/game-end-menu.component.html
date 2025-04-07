@@ -16,9 +16,9 @@
             </div> 
 
        </div>
-       <div>
-            <button [routerLink]="['']">Main Menu</button>
-            <button [routerLink]="['/scores']">Scores</button>
+       <div class="button-container mt-16">
+            <button [routerLink]="['']" (click)="saveFinalScore()">Main Menu</button>
+            <button [routerLink]="['/scores']" (click)="saveFinalScore()">Scores</button>
        </div>
 
     </div>

@@ -34,8 +34,16 @@ export class GameEndMenuComponent {
     }
   }
 
+  saveFinalScore() {
+    this.gameService.scores.push(
+      {name: this.playerName, class: this.playerClassTag, score: this.finalProfit}
+    )
+  }
+  
   get finalProfit(): number {
     return this.playerScore.currMoney
   }
+
+
 
 }

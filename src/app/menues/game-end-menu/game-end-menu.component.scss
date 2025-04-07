@@ -28,3 +28,11 @@ h3 {
     letter-spacing: 2px;
     font-size: 16px;
 }
+
+.button-container {
+    @include display();
+    gap: 32px;
+    button {
+        padding: 16px 32px;
+    }
+}

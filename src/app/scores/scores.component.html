@@ -1,14 +1,16 @@
 <a routerLink="" class="back-btn"><img src="./assets/img/arrow-back.png" alt="" class=""></a>
 <div class="main-content">
     <h1>Scores</h1>
-    <div class="scores-container">
+    <div class="scores-container" *ngIf="sortedScores && sortedScores.length > 0">
         <table class="mt-32">
             <tr>
+                <th>#</th>
                 <th>name</th>
                 <th>class</th>
                 <th>Score</th>
             </tr>
-            <tr *ngFor="let score of scoresData.scores; let i = index">
+            <tr *ngFor="let score of sortedScores | slice: 0 : 10; let i = index">
+                <td>{{ i + 1 }}</td>
                 <td>{{ score.name }}</td>
                 <td>{{ score.class }}</td>
                 <td>{{ score.score | currency }}</td>
