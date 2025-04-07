@@ -66,7 +66,7 @@ export class GameBoardComponent implements OnInit {
   // qoute: string = this.gameService.quotes[1]
 
   ngOnInit(): void {
-    this.getRandomCurrencys();
+    this.handleExchangeOffer();
   }
 
 
@@ -102,7 +102,7 @@ export class GameBoardComponent implements OnInit {
 
   nextDay() {
     this.startingDay++
-    this.getRandomCurrencys()
+    this.handleExchangeOffer();
     if (this.startingDay > this.finishDay ) {
       this.startingDay = 30;
       this.toggleGameEndMenu = !this.toggleGameEndMenu
@@ -195,12 +195,11 @@ export class GameBoardComponent implements OnInit {
   };
 
   // implement on ngOninit
-  getRandomCurrencys() {
+  handleExchangeOffer() {
     console.log('-----------------------')
     this.dailyExchangeOffer = [];
     const randomValue = Math.random()
     const randomIndexes = this.getRandomCurrencyIndexes() 
-    // console.log('randomindexes: ', randomIndexes.length)
     for (let i = 0; i < this.dailyExchangeIndexes.length; i++) {
       const currencyIndex = this.dailyExchangeIndexes[i];
       this.dailyExchangeOffer.push({...this.gameService.currencys[currencyIndex]}) // (...{}) creates a copy of the original, Spread operator
