@@ -19,7 +19,7 @@ import { GameEndMenuComponent } from "../menues/game-end-menu/game-end-menu.comp
 export class GameBoardComponent implements OnInit {
   gameService = inject(GameServiceService);
 
-  startingDay:number = 29;
+  startingDay:number = 0;
   finishDay:number = 30;
   dailyExchangeOffer:any[] = [];
   dailyExchangeIndexes: any[] = [];
@@ -45,12 +45,6 @@ export class GameBoardComponent implements OnInit {
       tag: 'MUSK',
       buyAt: 6200,
       count: 10
-    },
-    {
-      name: 'TEST',
-      tag: 'TEST',
-      buyAt: 1,
-      count: 1
     },
   ];
   sendingBuyValues = {
@@ -122,6 +116,11 @@ export class GameBoardComponent implements OnInit {
       currMoney: this.currentMoney
     }
   }
+
+
+
+
+
   
   receiveBuyTransaction(data: BuyTransactionValues) {
     const receiveBuyOrder = data;
@@ -170,6 +169,17 @@ export class GameBoardComponent implements OnInit {
     return Math.random() * (max - min) + min;
   }
 
+  generateBullBearMarketPercentages() {
+  const bullMultiplier = 10;
+  const bearMultiplier = 0.01;
+  const coinToss = 0.5;
+  if (Math.random() < coinToss) {
+    return bearMultiplier
+    } else {
+    return bullMultiplier
+    }
+  }
+
 
   getRandomCurrencyIndexes() {
     const numberOfMaxValues = this.generateRandomIndexValue();
@@ -184,17 +194,29 @@ export class GameBoardComponent implements OnInit {
     return this.dailyExchangeIndexes.sort();
   };
 
-
+  // implement on ngOninit
   getRandomCurrencys() {
+    console.log('-----------------------')
     this.dailyExchangeOffer = [];
+    const randomValue = Math.random()
     const randomIndexes = this.getRandomCurrencyIndexes() 
+    // console.log('randomindexes: ', randomIndexes.length)
     for (let i = 0; i < this.dailyExchangeIndexes.length; i++) {
       const currencyIndex = this.dailyExchangeIndexes[i];
-      this.dailyExchangeOffer.push(this.gameService.currencys[currencyIndex])
+      this.dailyExchangeOffer.push({...this.gameService.currencys[currencyIndex]}) // (...{}) creates a copy of the original, Spread operator
       const defaultCurrencyValue = this.dailyExchangeOffer[i].value
       this.dailyExchangeOffer[i].value = Math.floor(defaultCurrencyValue * this.generateRandomPercentageValue())
     }
+    if (randomValue > 0.9) {
+      console.log('Bulls or Bearmarket event')
+      const randomCoinIndex = Math.floor(Math.random() * randomIndexes.length)
+      console.log(this.dailyExchangeOffer[randomCoinIndex].name)
+      const newValue = this.dailyExchangeOffer[randomCoinIndex].value * this.generateBullBearMarketPercentages()
+      this.dailyExchangeOffer[randomCoinIndex].value = newValue
+
+    } 
   };
+
 
     // a getter "get" refresh the variable at anytime they are called into the template
     get calculateWalletSpace() {

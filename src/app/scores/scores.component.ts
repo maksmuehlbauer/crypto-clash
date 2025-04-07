@@ -14,6 +14,7 @@ import { CommonModule } from '@angular/common';
 export class ScoresComponent implements OnInit {
 
 scoresData = inject(GameServiceService);
+leaderboard = this.scoresData.scores
 sortedScores: any[] = [];
 
   ngOnInit(): void {
@@ -21,7 +22,7 @@ sortedScores: any[] = [];
   }
 
   sortHighscores() {
-    this.sortedScores = [...this.scoresData.scores].sort((a: any, b: any) => b.score - a.score);
+    this.sortedScores = this.leaderboard.sort((a: any, b: any) => b.score - a.score);
   }
 
 
