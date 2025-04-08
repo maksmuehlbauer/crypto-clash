@@ -9,6 +9,7 @@ import { InfoMenuComponent } from "../menues/info-menu/info-menu.component";
 import { GameEndMenuComponent } from "../menues/game-end-menu/game-end-menu.component";
 
 
+
 @Component({
   selector: 'app-game-board',
   standalone: true,
@@ -30,8 +31,9 @@ export class GameBoardComponent implements OnInit {
   currentItSecurity: number = this.itSecurity;
   toggleBuyMenu: boolean = false;
   toggleSellMenu: boolean = false;
-  toggleInfoMenu: boolean = false;
+  coinNotExistMenu: boolean = false;
   toggleGameEndMenu: boolean = false;
+  toggleBullBearMenu: boolean = false;
   selectedBuyIndex: number = 0;
   wallet: wallet[] = [
     {
@@ -44,6 +46,12 @@ export class GameBoardComponent implements OnInit {
       name: 'Musk Coin',
       tag: 'MUSK',
       buyAt: 6200,
+      count: 10
+    },
+    {
+      name: 'TEST1',
+      tag: 'ZZZ',
+      buyAt: 61616161,
       count: 10
     },
   ];
@@ -63,6 +71,8 @@ export class GameBoardComponent implements OnInit {
   sendProfitScore = {
     currMoney: this.currentMoney
   }
+
+
   // qoute: string = this.gameService.quotes[1]
 
   ngOnInit(): void {
@@ -81,7 +91,7 @@ export class GameBoardComponent implements OnInit {
       this.toggleSellMenu = !this.toggleSellMenu
     } else {
       // coin not found on exchange
-      this.openInfoMenu()
+      this.coinNotExistMenu = !this.coinNotExistMenu
     }
   }
 
@@ -92,11 +102,6 @@ export class GameBoardComponent implements OnInit {
       currCoinPrice: this.dailyExchangeOffer[index],
       currWalletIndex: i
     }
-  }
-
-  
-  openInfoMenu() {
-    this.toggleInfoMenu = !this.toggleInfoMenu
   }
 
 
@@ -116,11 +121,6 @@ export class GameBoardComponent implements OnInit {
       currMoney: this.currentMoney
     }
   }
-
-
-
-
-
   
   receiveBuyTransaction(data: BuyTransactionValues) {
     const receiveBuyOrder = data;
@@ -135,7 +135,8 @@ export class GameBoardComponent implements OnInit {
   }
 
   receiveInfoMsg(newState: boolean) {
-    this.toggleInfoMenu = newState
+    this.coinNotExistMenu = newState
+    this.toggleBullBearMenu = newState
   }
 
 
@@ -152,8 +153,7 @@ export class GameBoardComponent implements OnInit {
       currWalletCount: this.currentWalletCount,
       selectedCoin: this.dailyExchangeOffer[i],
       currWallet: this.wallet
-    }
-    
+    }    
   }
 
   generateRandomIndexValue() {
@@ -169,22 +169,9 @@ export class GameBoardComponent implements OnInit {
     return Math.random() * (max - min) + min;
   }
 
-  generateBullBearMarketPercentages() {
-  const bullMultiplier = 10;
-  const bearMultiplier = 0.01;
-  const coinToss = 0.5;
-  if (Math.random() < coinToss) {
-    return bearMultiplier
-    } else {
-    return bullMultiplier
-    }
-  }
-
-
   getRandomCurrencyIndexes() {
     const numberOfMaxValues = this.generateRandomIndexValue();
     this.dailyExchangeIndexes = []
-
     while (this.dailyExchangeIndexes.length < numberOfMaxValues) {
       const randomIndex = Math.floor(Math.random() * this.gameService.currencys.length)
       if (!this.dailyExchangeIndexes.includes(randomIndex)) {
@@ -194,9 +181,32 @@ export class GameBoardComponent implements OnInit {
     return this.dailyExchangeIndexes.sort();
   };
 
+  generateBullBearMarketPercentages() {
+    const bullMultiplier = 10;
+    const bearMultiplier = 0.01;
+    const coinToss = 0.5;
+    if (Math.random() < coinToss) {
+      return bearMultiplier
+      } else {
+      return bullMultiplier
+      }
+    }
+
+
+  handleBearBullEvent(randomValue: number, randomIndexes: any) {
+    if (randomValue > 0.85) {
+      const randomCoinIndex = Math.floor(Math.random() * randomIndexes.length)
+      const coin = this.dailyExchangeOffer[randomCoinIndex]
+      const newValue = coin.value * this.generateBullBearMarketPercentages()
+      // coin.value > newValue ? console.log('bear', coin.name) : console.log('bull',coin.name)
+      this.dailyExchangeOffer[randomCoinIndex].value = newValue
+      this.toggleBullBearMenu = !this.toggleBullBearMenu
+    } 
+  }  
+
+
   // implement on ngOninit
   handleExchangeOffer() {
-    console.log('-----------------------')
     this.dailyExchangeOffer = [];
     const randomValue = Math.random()
     const randomIndexes = this.getRandomCurrencyIndexes() 
@@ -206,14 +216,7 @@ export class GameBoardComponent implements OnInit {
       const defaultCurrencyValue = this.dailyExchangeOffer[i].value
       this.dailyExchangeOffer[i].value = Math.floor(defaultCurrencyValue * this.generateRandomPercentageValue())
     }
-    if (randomValue > 0.9) {
-      console.log('Bulls or Bearmarket event')
-      const randomCoinIndex = Math.floor(Math.random() * randomIndexes.length)
-      console.log(this.dailyExchangeOffer[randomCoinIndex].name)
-      const newValue = this.dailyExchangeOffer[randomCoinIndex].value * this.generateBullBearMarketPercentages()
-      this.dailyExchangeOffer[randomCoinIndex].value = newValue
-
-    } 
+    this.handleBearBullEvent(randomValue, randomIndexes)
   };
 
 
