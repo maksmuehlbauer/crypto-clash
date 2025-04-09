@@ -4,7 +4,7 @@
             <h2 class="mb-32">{{ bullBearMarket.eventInfo }} Event</h2>
             <h3>{{ bullBearMarket.eventCoinObj.name }} <br>
                 is going crazy right now
-                {{ bullBearMarket.eventCoinObj.value | currency:'USD':'symbol':'1.0-2' }}
+                <span [ngClass]="checkLowOrHighPrice()">{{ bullBearMarket.eventCoinObj.value | currency:'USD':'symbol':'1.0-2' }}</span>
             </h3>
             <h4 class="mt-16">{{ randomComment }}</h4>
         </div>

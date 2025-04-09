@@ -21,6 +21,14 @@ export class InfoMenuComponent implements OnInit {
   gameService = inject(GameServiceService)
   randomComment: string = ''
 
+  checkLowOrHighPrice() {
+    const eventCoin = this.gameService.currencys.find((currency) => this.bullBearMarket.eventCoinObj.tag === currency.tag);
+    if (!eventCoin) {
+      throw new Error(`Coin mit Tag ${this.bullBearMarket.eventCoinObj.tag} nicht gefunden.`);
+    }
+
+    return eventCoin.value > this.bullBearMarket.eventCoinObj.value ? 'bear-market' : 'bull-market'
+  }
 
   AbortTransaction() {
     const menuState = false;
@@ -36,5 +44,5 @@ export class InfoMenuComponent implements OnInit {
     this.randomComment = this.gameService.quotes[i]
   }
 
-  
+
 }

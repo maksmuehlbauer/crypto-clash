@@ -202,7 +202,7 @@ export class GameBoardComponent implements OnInit {
 
 
   handleBearBullEvent(randomValue: number, randomIndexes: any) {
-    if (randomValue > 0.0) {
+    if (randomValue > 0.85) {
       const randomCoinIndex = Math.floor(Math.random() * randomIndexes.length)
       this.eventCoin = this.dailyExchangeOffer[randomCoinIndex]
       const newValue = this.eventCoin.value * this.generateBullBearMarketPercentages()
