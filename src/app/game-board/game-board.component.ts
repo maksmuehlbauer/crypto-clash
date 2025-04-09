@@ -34,6 +34,8 @@ export class GameBoardComponent implements OnInit {
   coinNotExistMenu: boolean = false;
   toggleGameEndMenu: boolean = false;
   toggleBullBearMenu: boolean = false;
+  bearOrBullMarket: string = '';
+  eventCoin: any = {}
   selectedBuyIndex: number = 0;
   wallet: wallet[] = [
     {
@@ -55,6 +57,7 @@ export class GameBoardComponent implements OnInit {
       count: 10
     },
   ];
+  
   sendingBuyValues = {
     currMoney: this.currentMoney,
     currWalletSpace: this.currentWalletSpace,
@@ -70,6 +73,10 @@ export class GameBoardComponent implements OnInit {
   }
   sendProfitScore = {
     currMoney: this.currentMoney
+  }
+  sendExchangeEvent = {
+    eventInfo: this.bearOrBullMarket,
+    eventCoinObj: this.eventCoin
   }
 
 
@@ -121,6 +128,7 @@ export class GameBoardComponent implements OnInit {
       currMoney: this.currentMoney
     }
   }
+
   
   receiveBuyTransaction(data: BuyTransactionValues) {
     const receiveBuyOrder = data;
@@ -194,16 +202,23 @@ export class GameBoardComponent implements OnInit {
 
 
   handleBearBullEvent(randomValue: number, randomIndexes: any) {
-    if (randomValue > 0.85) {
+    if (randomValue > 0.0) {
       const randomCoinIndex = Math.floor(Math.random() * randomIndexes.length)
-      const coin = this.dailyExchangeOffer[randomCoinIndex]
-      const newValue = coin.value * this.generateBullBearMarketPercentages()
-      // coin.value > newValue ? console.log('bear', coin.name) : console.log('bull',coin.name)
+      this.eventCoin = this.dailyExchangeOffer[randomCoinIndex]
+      const newValue = this.eventCoin.value * this.generateBullBearMarketPercentages()
+      this.bearOrBullMarket = this.eventCoin.value > newValue ? 'Bear' : 'Bull'
       this.dailyExchangeOffer[randomCoinIndex].value = newValue
       this.toggleBullBearMenu = !this.toggleBullBearMenu
+      this.updateExchangeEvent();
     } 
   }  
 
+  updateExchangeEvent() {
+    return this.sendExchangeEvent = {
+      eventInfo: this.bearOrBullMarket,
+      eventCoinObj: this.eventCoin
+    }
+  }
 
   // implement on ngOninit
   handleExchangeOffer() {

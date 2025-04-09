@@ -14,19 +14,26 @@ export class GameServiceService {
     selectedClassIndex: 0
   }
 
-//   quotes = [
-//     "We will make America great again. - Donald Trump",
-//     "Amerika will never Forget your Trade, its a conclusion of national security - unknown",
-//     "Innovation is the key to the future. - Elon Musk",
-//     "Brexit means Brexit. - Boris Johnson",
-//     "Bitcoin is the future of money. - Michael Saylor",
-//     "Fake news is the enemy of the people. - Donald Trump",
-//     "Failure is an option here. If things are not failing, you are not innovating enough. - Elon Musk",
-//     "Let’s get Brexit done. - Boris Johnson",
-//     "Bitcoin is a swarm of cyberhornets. - Michael Saylor",
-//     "I love the poorly educated. - Donald Trump",
-//     "Persistence is very important. You should not give up unless you are forced to give up. - Elon Musk"
-// ]
+  quotes = [
+    "The blockchain must serve the algorithmic harmony of the state. - Xi Botping",
+    "Obedience is freedom, disobedience is inefficient. - Xi Botping",
+    "We upgraded the people. Democracy 2.0 is now bug-free. - Xi Botping",
+    "A single truth, stored immutably in the PartyChain. - Xi Botping",  
+    "Failure is the best business model. Unless you fail wrong. - Donald Musk XXIV",
+    "I built a rocket, a casino, and a presidency. In that order. - Donald Musk XXIV",
+    "Truth is what gets the most retweets. - Donald Musk XXIV",
+    "We’re gonna mine Mars. Freedom needs rare earths. - Donald Musk XXIV",  
+    "In uncertainty lies control. Predictability is for the weak. - PutAI-64",
+    "The future is encrypted. Only power holds the key. - PutAI-64",
+    "Empires collapse. Algorithms endure. - PutAI-64",
+    "I do not invade. I optimize borders. - PutAI-64",  
+    "We formed a committee to approve the committee to evaluate action. - BureauBot von der Leyda",
+    "Compliance is the new revolution. - BureauBot von der Leyda",
+    "The digital passport will set you free. If approved. - BureauBot von der Leyda",  
+    "Feelings are just outdated code. Let’s rewrite humanity. - Zuckenberg 3000",
+    "Your privacy is safe with us. Until beta is over. - Zuckenberg 3000",
+    "I don’t need friends. I have users. - Zuckenberg 3000"
+  ];
 
 
   scores: object[] = [
