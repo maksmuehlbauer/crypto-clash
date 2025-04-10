@@ -26,3 +26,9 @@ export interface wallet {
     buyAt: number;
     count: number;
 }
+
+export interface hackEvent {
+    lostCoins: number;
+    lostMoney: number;
+    lostCoinTag: string;
+}

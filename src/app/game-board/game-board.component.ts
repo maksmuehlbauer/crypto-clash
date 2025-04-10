@@ -7,6 +7,7 @@ import { BuyTransactionValues, SellTransactionValues, wallet } from '../clash.in
 import { SellMenuComponent } from "../menues/sell-menu/sell-menu.component";
 import { InfoMenuComponent } from "../menues/info-menu/info-menu.component";
 import { GameEndMenuComponent } from "../menues/game-end-menu/game-end-menu.component";
+import { hackEvent } from '../clash.interface';
 
 
 
@@ -34,28 +35,32 @@ export class GameBoardComponent implements OnInit {
   coinNotExistMenu: boolean = false;
   toggleGameEndMenu: boolean = false;
   toggleBullBearMenu: boolean = false;
+  toggleHackEventMenu: boolean = false;
   bearOrBullMarket: string = '';
   eventCoin: any = {}
   selectedBuyIndex: number = 0;
+  stolenCoins: number = 0;
+  stolenMoney: number = 0;
+  stolenCoinTag: string = 'none'
   wallet: wallet[] = [
-    {
-      name: 'Bitcoin',
-      tag: 'BTC',
-      buyAt: 175000,
-      count: 10
-    },
-    {
-      name: 'Musk Coin',
-      tag: 'MUSK',
-      buyAt: 6200,
-      count: 10
-    },
-    {
-      name: 'TEST1',
-      tag: 'ZZZ',
-      buyAt: 61616161,
-      count: 10
-    },
+    // {
+    //   name: 'Bitcoin',
+    //   tag: 'BTC',
+    //   buyAt: 175000,
+    //   count: 50
+    // },
+    // {
+    //   name: 'Musk Coin',
+    //   tag: 'MUSK',
+    //   buyAt: 6200,
+    //   count: 50
+    // },
+    // {
+    //   name: 'TEST1',
+    //   tag: 'ZZZ',
+    //   buyAt: 61616161,
+    //   count: 10
+    // },
   ];
   
   sendingBuyValues = {
@@ -78,9 +83,13 @@ export class GameBoardComponent implements OnInit {
     eventInfo: this.bearOrBullMarket,
     eventCoinObj: this.eventCoin
   }
+  sendHackEvent: hackEvent = {
+    lostCoins: this.stolenCoins,
+    lostMoney: this.stolenMoney,
+    lostCoinTag: this.stolenCoinTag
+  }
 
 
-  // qoute: string = this.gameService.quotes[1]
 
   ngOnInit(): void {
     this.handleExchangeOffer();
@@ -89,7 +98,6 @@ export class GameBoardComponent implements OnInit {
 
   openSellOrder(i: number) {
     let selectedCoin = this.wallet[i]
-    //array.some() --->  check the Array for "true" if no "true" found callback a single "false"
     const index = this.dailyExchangeOffer.findIndex( coinInExchange => 
       selectedCoin.tag === coinInExchange.tag 
     );
@@ -97,9 +105,13 @@ export class GameBoardComponent implements OnInit {
       this.updateSellValues(index, i)
       this.toggleSellMenu = !this.toggleSellMenu
     } else {
-      // coin not found on exchange
-      this.coinNotExistMenu = !this.coinNotExistMenu
+      this.openInfoMenu()
     }
+  }
+
+
+  openInfoMenu() {
+    this.coinNotExistMenu = !this.coinNotExistMenu
   }
 
   updateSellValues(index: number, i: number) {
@@ -118,10 +130,47 @@ export class GameBoardComponent implements OnInit {
     if (this.startingDay > this.finishDay ) {
       this.startingDay = 30;
       this.toggleGameEndMenu = !this.toggleGameEndMenu
-
+    }
+    if (this.calculateWalletSecurity()) {
+      this.toggleHackEventMenu = !this.toggleHackEventMenu
+      this.walletHackEvent();
     }
     this.updateFinalScore();
   }
+
+  calculateWalletSecurity() {
+    return Math.random() > this.itSecurity && this.startingDay >= 10
+  }
+
+
+  walletHackEvent() {
+    const pickPocketPercent = Math.random() * (0.9 - 0.7) +0.7;
+    const randomWalletIndex = Math.floor(Math.random() * this.wallet.length)
+    if (this.wallet.length > 0) {
+      const coinCount = this.wallet[randomWalletIndex].count
+      this.stolenCoinTag = this.wallet[randomWalletIndex].tag
+      this.stolenCoins = Math.floor(coinCount * pickPocketPercent)
+      this.wallet[randomWalletIndex].count -= this.stolenCoins
+    } else if (this.wallet.length === 0) {
+      this.stolenCoinTag = 'none'
+      this.stolenCoins = 0;
+      this.stolenMoney = this.currentMoney - (this.currentMoney * pickPocketPercent)
+      this.currentMoney = this.currentMoney * pickPocketPercent
+    }
+    this.updateHackValues()
+  }
+
+
+  updateHackValues() {
+    return this.sendHackEvent = {
+      lostCoins: this.stolenCoins,
+      lostMoney: this.stolenMoney,
+      lostCoinTag: this.stolenCoinTag
+    }
+  }
+
+
+
 
   updateFinalScore() {
     return this.sendProfitScore = {
@@ -136,6 +185,7 @@ export class GameBoardComponent implements OnInit {
     this.currentMoney = receiveBuyOrder.currMoney;
   }
 
+
   receiveSellTransaction(data: SellTransactionValues) {
     const receiveSellOrder = data;
     this.toggleSellMenu = receiveSellOrder.toggleMenu;
@@ -145,6 +195,7 @@ export class GameBoardComponent implements OnInit {
   receiveInfoMsg(newState: boolean) {
     this.coinNotExistMenu = newState
     this.toggleBullBearMenu = newState
+    this.toggleHackEventMenu = newState
   }
 
 
@@ -172,10 +223,11 @@ export class GameBoardComponent implements OnInit {
 
 
   generateRandomPercentageValue() {
-    const min = 0.75;
-    const max = 1.25;
+    const min = 0.6;
+    const max = 1.4;
     return Math.random() * (max - min) + min;
   }
+
 
   getRandomCurrencyIndexes() {
     const numberOfMaxValues = this.generateRandomIndexValue();
@@ -189,11 +241,12 @@ export class GameBoardComponent implements OnInit {
     return this.dailyExchangeIndexes.sort();
   };
 
+
   generateBullBearMarketPercentages() {
     const bullMultiplier = 10;
     const bearMultiplier = 0.01;
-    const coinToss = 0.5;
-    if (Math.random() < coinToss) {
+    const evenTrigger = 0.6;
+    if (Math.random() < evenTrigger) {
       return bearMultiplier
       } else {
       return bullMultiplier
@@ -201,26 +254,6 @@ export class GameBoardComponent implements OnInit {
     }
 
 
-  handleBearBullEvent(randomValue: number, randomIndexes: any) {
-    if (randomValue > 0.85) {
-      const randomCoinIndex = Math.floor(Math.random() * randomIndexes.length)
-      this.eventCoin = this.dailyExchangeOffer[randomCoinIndex]
-      const newValue = this.eventCoin.value * this.generateBullBearMarketPercentages()
-      this.bearOrBullMarket = this.eventCoin.value > newValue ? 'Bear' : 'Bull'
-      this.dailyExchangeOffer[randomCoinIndex].value = newValue
-      this.toggleBullBearMenu = !this.toggleBullBearMenu
-      this.updateExchangeEvent();
-    } 
-  }  
-
-  updateExchangeEvent() {
-    return this.sendExchangeEvent = {
-      eventInfo: this.bearOrBullMarket,
-      eventCoinObj: this.eventCoin
-    }
-  }
-
-  // implement on ngOninit
   handleExchangeOffer() {
     this.dailyExchangeOffer = [];
     const randomValue = Math.random()
@@ -233,6 +266,27 @@ export class GameBoardComponent implements OnInit {
     }
     this.handleBearBullEvent(randomValue, randomIndexes)
   };
+
+
+  handleBearBullEvent(randomValue: number, randomIndexes: any) {
+    if (randomValue > 0.80) {
+      const randomCoinIndex = Math.floor(Math.random() * randomIndexes.length)
+      this.eventCoin = this.dailyExchangeOffer[randomCoinIndex]
+      const newValue = this.eventCoin.value * this.generateBullBearMarketPercentages()
+      this.bearOrBullMarket = this.eventCoin.value > newValue ? 'Bear' : 'Bull'
+      this.dailyExchangeOffer[randomCoinIndex].value = newValue
+      this.toggleBullBearMenu = !this.toggleBullBearMenu
+      this.updateExchangeEvent();
+    } 
+  }  
+
+
+  updateExchangeEvent() {
+    return this.sendExchangeEvent = {
+      eventInfo: this.bearOrBullMarket,
+      eventCoinObj: this.eventCoin
+    }
+  }
 
 
     // a getter "get" refresh the variable at anytime they are called into the template

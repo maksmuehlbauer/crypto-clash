@@ -15,33 +15,40 @@ export class InfoMenuComponent implements OnInit {
     eventInfo: string;
     eventCoinObj: any;
   }
+  @Input() hackEvent!: {
+    lostCoins: number;
+    lostMoney: number;
+    lostCoinTag: string;
+  }
 
   @Output() closeMenu = new EventEmitter<boolean>(); 
 
   gameService = inject(GameServiceService)
   randomComment: string = ''
 
+  ngOnInit(): void {
+    this.qouteRandomGenerator()
+  }
+
+
+  qouteRandomGenerator() {
+    const i = Math.floor(Math.random() * this.gameService.quotes.length)
+    this.randomComment = this.gameService.quotes[i]
+  }
+
+
   checkLowOrHighPrice() {
     const eventCoin = this.gameService.currencys.find((currency) => this.bullBearMarket.eventCoinObj.tag === currency.tag);
     if (!eventCoin) {
       throw new Error(`Coin mit Tag ${this.bullBearMarket.eventCoinObj.tag} nicht gefunden.`);
     }
-
     return eventCoin.value > this.bullBearMarket.eventCoinObj.value ? 'bear-market' : 'bull-market'
   }
+  
 
   AbortTransaction() {
     const menuState = false;
     this.closeMenu.emit(menuState)
-  }
-
-  ngOnInit(): void {
-    this.qouteRandomGenerator()
-  }
-
-  qouteRandomGenerator() {
-    const i = Math.floor(Math.random() * this.gameService.quotes.length)
-    this.randomComment = this.gameService.quotes[i]
   }
 
 

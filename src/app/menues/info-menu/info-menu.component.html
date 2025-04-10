@@ -9,10 +9,28 @@
             <h4 class="mt-16">{{ randomComment }}</h4>
         </div>
         <div class="buy-infos mb-32" *ngIf="coinNotExist">
+            <h2 class="mb-32">Exchange Info</h2>
             <h3 class="mt-16">
                 {{ coinNotExist }}
             </h3>
-        </div>     
+        </div>
+        <div class="buy-infos mb-32" *ngIf="hackEvent">
+            <h2 class="mb-32">youre Hacked</h2>
+            <div class="buy-menu">
+                <div class="text-info">
+                    <h3>Money lost</h3>
+                    <h3>stolen Coin</h3>
+                    <h3>Coins Lost</h3>
+
+                </div>
+                <div class="buy-infos txt-right">
+                    <h3>{{ hackEvent.lostMoney| currency:'USD':'symbol':'1.0-2' }}</h3>
+                    <h3>{{ hackEvent.lostCoinTag }}</h3>
+                    <h3>{{ hackEvent.lostCoins }}</h3>
+
+                </div> 
+            </div>
+        </div>  
         <button (click)="AbortTransaction()">close</button>
     </div>
 </div>

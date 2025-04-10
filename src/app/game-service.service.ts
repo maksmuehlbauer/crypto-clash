@@ -51,7 +51,7 @@ export class GameServiceService {
     {
       name: 'Ethereum',
       tag: 'ETH',
-      value: 3500,
+      value: 27500,
     },
     {
       name: 'Litecoin',
@@ -61,7 +61,7 @@ export class GameServiceService {
     {
       name: 'Ripple',
       tag: 'XRP',
-      value: 15,
+      value: 90,
     },
     {
       name: 'Cardano',
@@ -71,7 +71,7 @@ export class GameServiceService {
     {
       name: 'Trump Coin',
       tag: 'TRUMP',
-      value: 64000,
+      value: 90000,
     },
     {
       name: 'Musk Coin',
@@ -99,7 +99,7 @@ export class GameServiceService {
     {
       name: 'Asia Bot Network',
       tag: 'ABN',
-      startMoney: 3500,
+      startMoney: 4500,
       itSecurity: 0.85,
       walletspace: 115,
       attributes: {
@@ -108,25 +108,25 @@ export class GameServiceService {
           value: 15
         },
         attTwo: {
-          description: '- 1.500 $ Starting Money',
-          value: -1500
+          description: '- 500 $ Starting Money',
+          value: -500
         },
       }
     },
     {
       name: 'Donald Musk Holding',
       tag: 'DMH',
-      startMoney: 7000,
-      itSecurity: 0.75,
+      startMoney: 10000,
+      itSecurity: 0.80,
       walletspace: 100,
       attributes: {
         attOne: {
-          description: '+ 2.000 $ Starting Money',
-          value: 2000
+          description: '+ 5.000 $ Starting Money',
+          value: 5000
         },
         attTwo: {
-          description: '- 10 IT-Security',
-          value: -10
+          description: '- 5 IT-Security',
+          value: -5
         },
       }
     },
@@ -135,15 +135,15 @@ export class GameServiceService {
       tag: 'BCE',
       startMoney: 5000,
       itSecurity: 0.95,
-      walletspace: 90,
+      walletspace: 85,
       attributes: {
         attOne: {
           description: '+ 10 IT-Security',
           value: 10
         },
         attTwo: {
-          description: '- 10 Hardware Wallet Space',
-          value: -10
+          description: '- 15 Hardware Wallet Space',
+          value: -15
         },
       }
     },

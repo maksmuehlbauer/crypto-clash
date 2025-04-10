@@ -71,4 +71,6 @@
 <app-sell-menu *ngIf="toggleSellMenu" [sellValues]="sendingSellValues" (sellTransaction)="receiveSellTransaction($event)"></app-sell-menu>
 <app-info-menu *ngIf="coinNotExistMenu" coinNotExist="coin not exist on this Exchange" (closeMenu)="receiveInfoMsg($event)"></app-info-menu>
 <app-info-menu *ngIf="toggleBullBearMenu" [bullBearMarket]="sendExchangeEvent" (closeMenu)="receiveInfoMsg($event)"></app-info-menu>
+<app-info-menu *ngIf="toggleHackEventMenu" [hackEvent]="sendHackEvent" (closeMenu)="receiveInfoMsg($event)"></app-info-menu>
 <app-game-end-menu *ngIf="toggleGameEndMenu" [playerScore]="sendProfitScore"></app-game-end-menu>
+
