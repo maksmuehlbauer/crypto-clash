@@ -41,7 +41,8 @@ export class GameBoardComponent implements OnInit {
   selectedBuyIndex: number = 0;
   stolenCoins: number = 0;
   stolenMoney: number = 0;
-  stolenCoinTag: string = 'none'
+  stolenCoinTag: string = 'none';
+  dayPlayerIsHackable: number = 10;
   wallet: wallet[] = [
     // {
     //   name: 'Bitcoin',
@@ -139,7 +140,7 @@ export class GameBoardComponent implements OnInit {
   }
 
   calculateWalletSecurity() {
-    return Math.random() > this.itSecurity && this.startingDay >= 10
+    return Math.random() > this.itSecurity && this.startingDay >= this.dayPlayerIsHackable
   }
 
 

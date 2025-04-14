@@ -175,6 +175,53 @@ h2 {
   }
 }
 
+@media (max-width: 800px) {
+  .desk-max-width {
+    padding: 0 24px;
+  }
+}
+
+@media (max-width: 768px) {
+  h1 {
+    font-size: 40px;
+    letter-spacing: 4px;
+  }
+  
+  h2 {
+    font-size: 26px;
+    letter-spacing: 6px;
+  }  
+}
+
+@media (max-width: 600px) {
+  h1 {
+    font-size: 28px;
+    letter-spacing: 4px;
+  }
+  
+  h2 {
+    font-size: 16px;
+    letter-spacing: 6px;
+  } 
+}
+
+@media (max-width: 450px) {
+  .desk-max-width {
+    padding: 0 12px;
+  }
+  
+  h1 {
+    font-size: 20px;
+    letter-spacing: 1.8px;
+  }
+  
+  h2 {
+    font-size: 16px;
+    letter-spacing: 1px;
+  } 
+}
+
+
 
 
 

@@ -18,6 +18,30 @@
     padding: 64px 64px;
 }
 
+@media (max-width: 768px) {
+    .gamebox {
+        padding: 24px 24px;
+    }
+}
+
+@media (max-width: 450px) {
+    .gamebox {
+        padding: 12px 12px;
+    }
+}
+
+@media (max-height: 850px) {
+.gamebox {
+    height: 680px;
+    }
+}
+
+@media (max-height: 680px) {
+    .gamebox {
+        height: 640px;
+        }
+    }
+
 
 
 
