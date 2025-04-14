@@ -8,7 +8,7 @@
 .main-content {
     @include display($jc: flex-start, $ai: flex-start);
     flex-direction: column;
-    height: 600px;
+    // height: 600px;
     overflow: hidden;
     // overflow-y: scroll;
     padding-right: 16px;
@@ -38,6 +38,30 @@ p {
     text-align: center;
 }
 
+.class-sepcial {
+    display: inline-block;
+    font-weight: 600;
+    margin-bottom: 4px;
+    margin-top: 24px;
+    color: $secondary;
+}
+
+@media (max-width: 768px) {
+    .main-content {
+        align-items: center;
+        text-align: center;
+        margin-top: 32px;
+    }
+}
+
+@media (max-width: 400px) {
+    .main-content {
+        font-size: 14px;
+        padding: 0 16px;
+    }
+}
+
+
 // /* width */
 // ::-webkit-scrollbar {
 //     width: 8px;
@@ -57,11 +81,3 @@ p {
 // ::-webkit-scrollbar-thumb:hover {
 //     background: rgba($error-color, 0.3); // 30% Transparenz
 // }
-
-.class-sepcial {
-    display: inline-block;
-    font-weight: 600;
-    margin-bottom: 4px;
-    margin-top: 24px;
-    color: $secondary;
-}

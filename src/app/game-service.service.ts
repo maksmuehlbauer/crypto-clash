@@ -37,9 +37,9 @@ export class GameServiceService {
 
 
   scores: object[] = [
-    // {name: 'max', class: 'ABN', score: 710000},
-    // {name: 'lulu', class: 'DMH', score: 5000},
-    // {name: 'Test1', class: 'DMH', score: 600000}
+    {name: 'max', class: 'ABN', score: 710000},
+    {name: 'lulu', class: 'DMH', score: 5000},
+    {name: 'Test1', class: 'DMH', score: 60000000}
   ]
 
   currencys = [

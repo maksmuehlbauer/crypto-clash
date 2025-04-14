@@ -26,7 +26,7 @@ export class GameBoardComponent implements OnInit {
   dailyExchangeOffer:any[] = [];
   dailyExchangeIndexes: any[] = [];
   classIndex = this.gameService.playerDetails.selectedClassIndex;
-  currentMoney: number = this.startMoney;
+  currentMoney: number = 1300000000; //this.startMoney
   currentWalletSpace:number = this.walletSpace;
   currentWalletCount: number = 0;
   currentItSecurity: number = this.itSecurity;

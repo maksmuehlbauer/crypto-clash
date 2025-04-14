@@ -11,7 +11,7 @@
     height: 600px;
     overflow: hidden;
     // overflow-y: scroll;
-    padding-right: 16px;
+    // padding-right: 16px;
 }
 
 .scores-container {
@@ -36,6 +36,23 @@ table {
         }
         &:nth-child(even) {
             background-color: $body-color;
+        }
+    }
+}
+
+@media (max-width: 400px) {
+    .main-content {
+        font-size: 14px;
+    }
+
+    table {
+        tr {
+            th {
+                padding: 12px 8px;
+            }
+            td {
+                padding: 12px 8px;
+            }
         }
     }
 }

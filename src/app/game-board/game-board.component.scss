@@ -160,3 +160,80 @@ table {
 .txt-right {
     text-align: right;
 }
+
+@media (max-width: 680px) {
+    .row-1 {
+        flex-direction: column;        
+    }
+
+    .d-none {
+        display: none;
+    }
+
+    button {
+        padding: 8px 0;
+        font-size: 14px;
+        letter-spacing: 1px;
+        padding: 8px;
+    }
+
+    h4 {
+        font-size: 14px;
+    }
+
+    .title {
+        font-size: 14px;
+    } 
+
+    .overview {
+        width: 100%;
+        >div {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr); // 2 Spalten
+            grid-template-rows: repeat(2, auto);   // 2 Zeilen
+        }
+    }
+    
+    .exchanges {
+        width: 100%;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr); // 2 Spalten
+        grid-template-rows: repeat(2, auto);   // 2 Zeilen
+    }
+}
+
+@media (max-width: 570px) {
+    .row-3 {
+        flex-direction: column-reverse;
+    }
+
+    table {
+        tr {
+            td {
+                padding: 6px;
+                font-family: sans-serif;
+            }
+        }
+    }
+
+    .exchange-offer {
+        width: 100%;   
+    }
+    
+    .hardware-wallet {
+        width: 100%;
+        margin-bottom: 24px;     
+    }
+
+    .exchange-offer {
+        width: 100%;        
+    }
+    
+    .hardware-wallet {
+        width: 100%;
+    }
+
+    .row-2 {
+        margin: 0 !important;
+    }
+}
