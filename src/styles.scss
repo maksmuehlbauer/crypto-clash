@@ -193,6 +193,21 @@ h2 {
   }  
 }
 
+@media (max-width: 680px) {
+  .menu {
+    width: 350px;
+    height: 400px;
+  }
+
+  .back-btn {
+    width: 48px;
+    height: 48px;
+    right: 16px;
+    top: 4px;
+    left: unset;
+  }
+}
+
 @media (max-width: 600px) {
   h1 {
     font-size: 28px;
@@ -203,11 +218,6 @@ h2 {
     font-size: 16px;
     letter-spacing: 6px;
   } 
-
-  .back-btn {
-    width: 48px;
-    height: 48px;
-  }
 }
 
 @media (max-width: 450px) {
@@ -224,6 +234,12 @@ h2 {
     font-size: 16px;
     letter-spacing: 1px;
   } 
+
+  .back-btn {
+    width: 40px;
+    height: 40px;
+    top: 4px;
+  }
 }
 
 

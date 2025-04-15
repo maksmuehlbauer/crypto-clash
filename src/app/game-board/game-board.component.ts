@@ -26,7 +26,7 @@ export class GameBoardComponent implements OnInit {
   dailyExchangeOffer:any[] = [];
   dailyExchangeIndexes: any[] = [];
   classIndex = this.gameService.playerDetails.selectedClassIndex;
-  currentMoney: number = 1300000000; //this.startMoney
+  currentMoney: number = this.startMoney
   currentWalletSpace:number = this.walletSpace;
   currentWalletCount: number = 0;
   currentItSecurity: number = this.itSecurity;
@@ -49,19 +49,7 @@ export class GameBoardComponent implements OnInit {
     //   tag: 'BTC',
     //   buyAt: 175000,
     //   count: 50
-    // },
-    // {
-    //   name: 'Musk Coin',
-    //   tag: 'MUSK',
-    //   buyAt: 6200,
-    //   count: 50
-    // },
-    // {
-    //   name: 'TEST1',
-    //   tag: 'ZZZ',
-    //   buyAt: 61616161,
-    //   count: 10
-    // },
+    // }
   ];
   
   sendingBuyValues = {
@@ -145,13 +133,16 @@ export class GameBoardComponent implements OnInit {
 
 
   walletHackEvent() {
-    const pickPocketPercent = Math.random() * (0.9 - 0.7) +0.7;
+    console.log('current Money', this.currentMoney)
+    console.log('HD wallet', this.calculateWalletSpace)
+    const pickPocketPercent = Math.random() * (0.4 - 0.2) +0.2;
     const randomWalletIndex = Math.floor(Math.random() * this.wallet.length)
     if (this.wallet.length > 0) {
       const coinCount = this.wallet[randomWalletIndex].count
       this.stolenCoinTag = this.wallet[randomWalletIndex].tag
       this.stolenCoins = Math.floor(coinCount * pickPocketPercent)
       this.wallet[randomWalletIndex].count -= this.stolenCoins
+      this.stolenMoney = 0
     } else if (this.wallet.length === 0) {
       this.stolenCoinTag = 'none'
       this.stolenCoins = 0;
@@ -159,6 +150,8 @@ export class GameBoardComponent implements OnInit {
       this.currentMoney = this.currentMoney * pickPocketPercent
     }
     this.updateHackValues()
+    console.log(this.sendHackEvent)
+    
   }
 
 

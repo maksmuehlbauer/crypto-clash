@@ -28,3 +28,15 @@ h3 {
     letter-spacing: 2px;
     font-size: 16px;
 }
+
+@media (max-width: 680px) {
+    h3 {
+        font-size: 14px;
+    }
+
+    .buy-menu {
+        gap: 24px;
+    }
+    
+}
+

@@ -56,8 +56,15 @@ p {
 
 @media (max-width: 400px) {
     .main-content {
-        font-size: 14px;
-        padding: 0 16px;
+        font-size: 12px;
+    }
+
+    .class-sepcial {
+        margin: 12px 0 0 0;
+    }
+
+    p {
+        margin-top: 8px !important;
     }
 }
 

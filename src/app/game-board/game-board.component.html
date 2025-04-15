@@ -12,20 +12,20 @@
                     <!-- <h3>Defi USDC</h3> Later Feature -->
                 </div>
                 <div class="stats">
-                    <h4>{{ currentMoney | currency }}</h4>
+                    <h4 >{{ currentMoney | currency }}</h4>
                     <h4>{{ currentItSecurity| percent:'1.0-0'}}</h4>
                     <h4>{{ classTag }}</h4>
                     <h4>{{ startingDay }} / {{ finishDay }}</h4>
                 </div>
             </div>
-
         </div>
-        <div class="divider d-none"></div>
+        <div class="divider divider-none"></div>
         <div class="exchanges">
-            <span class="title">Exchanges</span>
-            <button (click)="nextDay()">Asia Bot Exchange</button>
-            <button (click)="nextDay()">Donald Musk Trading</button>
-            <button (click)="nextDay()">European Stoxx Room</button>
+            <span class="title d-none">Exchanges</span>
+            <button class="d-none" (click)="nextDay()">Asia Bot Exchange</button>
+            <button class="d-none" (click)="nextDay()">Donald Musk Trading</button>
+            <button class="d-none" (click)="nextDay()">European Stoxx Room</button>
+            <button class="small-devices-570px" (click)="nextDay()">next Day</button>
             <!-- <button>ACL</button> Later Feature -->
         </div>
    </div>
@@ -38,7 +38,7 @@
    </div>
    <div class="row-3 mt-32">
         <div class="exchange-offer">
-            <span class="title">Exchange Offer</span>
+            <span class="title d-none">Exchange Offer</span>
             <table>
                 <tr>
                     <th>Coin</th>

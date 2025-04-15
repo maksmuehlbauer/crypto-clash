@@ -161,17 +161,33 @@ table {
     text-align: right;
 }
 
-@media (max-width: 680px) {
-    .row-1 {
-        flex-direction: column;        
-    }
+.small-devices-570px {
+    display: none;
+}
 
-    .d-none {
+@media (max-width: 680px) {
+    .row-2 {
         display: none;
     }
 
+    .divider-none {
+        display: none;
+    }
+
+    .main-content {
+        height: 800px;
+    }
+
+    .small-devices-680px {
+        display: block;
+    }
+
+    .row-1 {
+        flex-direction: column;  
+        margin-top: 0;      
+    }
+
     button {
-        padding: 8px 0;
         font-size: 14px;
         letter-spacing: 1px;
         padding: 8px;
@@ -179,6 +195,7 @@ table {
 
     h4 {
         font-size: 14px;
+        margin-bottom: 8px;
     }
 
     .title {
@@ -187,22 +204,45 @@ table {
 
     .overview {
         width: 100%;
+        margin-bottom: 8px;
         >div {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr); // 2 Spalten
-            grid-template-rows: repeat(2, auto);   // 2 Zeilen
+            >.stat-text {
+                width: 35%;
+            }
+            >.stats {
+                width: 65%;
+            }
         }
     }
     
     .exchanges {
         width: 100%;
-        display: grid;
-        grid-template-columns: repeat(3, 1fr); // 2 Spalten
-        grid-template-rows: repeat(2, auto);   // 2 Zeilen
+        gap: 8px;
+    }
+
+    .row-3 {
+        margin-top: 16px;
+    }
+
+    table {
+        tr {
+            th {
+                padding: 4px;
+                font-family: sans-serif;
+            }
+        }
     }
 }
 
 @media (max-width: 570px) {
+    .small-devices-570px {
+        display: block;
+    }
+
+    .d-none {
+        display: none;
+    }
+
     .row-3 {
         flex-direction: column-reverse;
     }
@@ -210,7 +250,7 @@ table {
     table {
         tr {
             td {
-                padding: 6px;
+                padding: 4px;
                 font-family: sans-serif;
             }
         }
@@ -229,11 +269,15 @@ table {
         width: 100%;        
     }
     
-    .hardware-wallet {
-        width: 100%;
-    }
-
     .row-2 {
         margin: 0 !important;
     }
 }
+
+@media (max-width: 450px) {
+    .main-content {
+        height: 625px;
+    }
+}
+
+

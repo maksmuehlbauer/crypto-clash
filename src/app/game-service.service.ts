@@ -37,9 +37,9 @@ export class GameServiceService {
 
 
   scores: object[] = [
-    {name: 'max', class: 'ABN', score: 710000},
-    {name: 'lulu', class: 'DMH', score: 5000},
-    {name: 'Test1', class: 'DMH', score: 60000000}
+    // {name: 'max', class: 'ABN', score: 710000},
+    // {name: 'lulu', class: 'DMH', score: 5000},
+    // {name: 'Test1', class: 'DMH', score: 60000000}
   ]
 
   currencys = [
@@ -101,23 +101,23 @@ export class GameServiceService {
       tag: 'ABN',
       startMoney: 4500,
       itSecurity: 0.85,
-      walletspace: 115,
+      walletspace: 125,
       attributes: {
         attOne: {
-          description: '+ 15 Hardware Wallet Space',
-          value: 15
+          description: '+ 25 Hardware Wallet Space',
+          value: 25
         },
         attTwo: {
-          description: '- 500 $ Starting Money',
-          value: -500
+          description: '- 2500 $ Starting Money',
+          value: -2500
         },
       }
     },
     {
       name: 'Donald Musk Holding',
       tag: 'DMH',
-      startMoney: 10000,
-      itSecurity: 0.80,
+      startMoney: 12000,
+      itSecurity: 0.77,
       walletspace: 100,
       attributes: {
         attOne: {
@@ -125,20 +125,20 @@ export class GameServiceService {
           value: 5000
         },
         attTwo: {
-          description: '- 5 IT-Security',
+          description: '- 8 % IT-Security',
           value: -5
         },
       }
     },
     {
-      name: 'Breaucracy Empire',
+      name: 'Bureaucracy Empire',
       tag: 'BCE',
-      startMoney: 5000,
+      startMoney: 7000,
       itSecurity: 0.95,
       walletspace: 85,
       attributes: {
         attOne: {
-          description: '+ 10 IT-Security',
+          description: '+ 10 % IT-Security',
           value: 10
         },
         attTwo: {
