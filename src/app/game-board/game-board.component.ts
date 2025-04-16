@@ -36,7 +36,10 @@ export class GameBoardComponent implements OnInit {
   toggleGameEndMenu: boolean = false;
   toggleBullBearMenu: boolean = false;
   toggleHackEventMenu: boolean = false;
+  toggleGameInfoMenu: boolean = false;
   bearOrBullMarket: string = '';
+  notExistOnExchange: string = 'coin not exist on this Exchange'
+  networkUserInfo: string = 'In the name of Satoshi Nakamoto, Saylor-AI will try to hack your wallet'
   eventCoin: any = {}
   selectedBuyIndex: number = 0;
   stolenCoins: number = 0;
@@ -45,8 +48,8 @@ export class GameBoardComponent implements OnInit {
   dayPlayerIsHackable: number = 10;
   wallet: wallet[] = [
     // {
-    //   name: 'Bitcoin',
-    //   tag: 'BTC',
+    //   name: 'TEST',
+    //   tag: 'ZZZ',
     //   buyAt: 175000,
     //   count: 50
     // }
@@ -120,6 +123,9 @@ export class GameBoardComponent implements OnInit {
       this.startingDay = 30;
       this.toggleGameEndMenu = !this.toggleGameEndMenu
     }
+    if (this.startingDay === this.dayPlayerIsHackable) {
+      this.toggleGameInfoMenu = !this.toggleGameInfoMenu
+    }
     if (this.calculateWalletSecurity()) {
       this.toggleHackEventMenu = !this.toggleHackEventMenu
       this.walletHackEvent();
@@ -133,8 +139,6 @@ export class GameBoardComponent implements OnInit {
 
 
   walletHackEvent() {
-    console.log('current Money', this.currentMoney)
-    console.log('HD wallet', this.calculateWalletSpace)
     const pickPocketPercent = Math.random() * (0.4 - 0.2) +0.2;
     const randomWalletIndex = Math.floor(Math.random() * this.wallet.length)
     if (this.wallet.length > 0) {
@@ -150,8 +154,6 @@ export class GameBoardComponent implements OnInit {
       this.currentMoney = this.currentMoney * pickPocketPercent
     }
     this.updateHackValues()
-    console.log(this.sendHackEvent)
-    
   }
 
 
@@ -187,9 +189,10 @@ export class GameBoardComponent implements OnInit {
   }
 
   receiveInfoMsg(newState: boolean) {
-    this.coinNotExistMenu = newState
-    this.toggleBullBearMenu = newState
-    this.toggleHackEventMenu = newState
+    this.coinNotExistMenu = newState;
+    this.toggleBullBearMenu = newState;
+    this.toggleHackEventMenu = newState;
+    this.toggleGameInfoMenu = newState;
   }
 
 

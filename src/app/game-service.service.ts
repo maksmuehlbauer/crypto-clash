@@ -56,17 +56,17 @@ export class GameServiceService {
     {
       name: 'Litecoin',
       tag: 'LTC',
-      value: 150,
+      value: 1200,
     },
     {
       name: 'Ripple',
       tag: 'XRP',
-      value: 90,
+      value: 350,
     },
     {
       name: 'Cardano',
       tag: 'ADA',
-      value: 920,
+      value: 2300,
     },
     {
       name: 'Trump Coin',
@@ -86,7 +86,7 @@ export class GameServiceService {
     {
       name: 'Dogecoin',
       tag: 'DOGE',
-      value: 23,
+      value: 150,
     },
     {
       name: 'Binance Coin',

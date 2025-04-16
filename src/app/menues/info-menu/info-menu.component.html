@@ -14,8 +14,14 @@
                 {{ coinNotExist }}
             </h3>
         </div>
+        <div class="buy-infos mb-32" *ngIf="networkInfo">
+            <h2 class="mb-32">Hashrate Collapse</h2>
+            <h3 class="mt-16">
+                {{ networkInfo }}
+            </h3>
+        </div>
         <div class="buy-infos mb-32" *ngIf="hackEvent">
-            <h2 class="mb-32">Saylor Taxes</h2>
+            <h2 class="mb-32 f-size-24">Saylor-AI Taxes Hack</h2>
             <div class="buy-menu">
                 <div class="text-info">
                     <h3>Money lost</h3>

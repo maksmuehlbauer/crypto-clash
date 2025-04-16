@@ -20,6 +20,7 @@ export class InfoMenuComponent implements OnInit {
     lostMoney: number;
     lostCoinTag: string;
   }
+  @Input() networkInfo: string = '';
 
   @Output() closeMenu = new EventEmitter<boolean>(); 
 
