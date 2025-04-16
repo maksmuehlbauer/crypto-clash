@@ -1,8 +1,9 @@
 import { Component, inject } from '@angular/core';
 import { GameServiceService } from '../game-service.service';
 import { CommonModule } from '@angular/common';
-import { FormsModule, NgModel, NgForm } from '@angular/forms';
+import { FormsModule, NgForm } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
+
 
 @Component({
   selector: 'app-mainwindow',
